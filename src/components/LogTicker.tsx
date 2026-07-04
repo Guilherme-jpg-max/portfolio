@@ -34,10 +34,10 @@ export function LogTicker() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed bottom-14 right-4 z-20 hidden md:block font-mono text-[10px] leading-relaxed text-warm-paper/25 max-w-[240px] text-right"
+      className="pointer-events-none fixed bottom-14 right-4 z-20 hidden md:block font-mono text-[10px] leading-relaxed text-warm-paper/45 max-w-[240px] text-right"
     >
       {lines.map((l, i) => (
-        <div key={`${i}-${l}`} style={{ opacity: 0.25 + (i / lines.length) * 0.35 }}>
+        <div key={`${i}-${l}`} style={{ opacity: 0.45 + (i / lines.length) * 0.35 }}>
           {l}
         </div>
       ))}
