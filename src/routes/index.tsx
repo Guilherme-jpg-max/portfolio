@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { CrtCanvas } from "@/components/CrtCanvas";
 import { BootSequence } from "@/components/BootSequence";
 import { LogTicker } from "@/components/LogTicker";
-import { Github, Lock } from "lucide-react";
+import { Github, Lock, Menu, X } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -104,16 +104,17 @@ function Portfolio() {
   const [progress, setProgress] = useState(0);
   const [bootDone, setBootDone] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
   // ── paginação dos projetos ──
-  const PAGE_SIZE = 4;
+  const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(0);
   const scrubberRef = useRef<HTMLDivElement>(null);
 
-  const totalPages = Math.ceil(PROJECTS.length / PAGE_SIZE);
+  const totalPages = Math.ceil(PROJECTS.length / pageSize);
   const pagedProjects = PROJECTS.slice(
-    currentPage * PAGE_SIZE,
-    currentPage * PAGE_SIZE + PAGE_SIZE
+    currentPage * pageSize,
+    currentPage * pageSize + pageSize
   );
 
   const goToPage = (page: number) => {
@@ -150,6 +151,18 @@ function Portfolio() {
   }, [currentPage, totalPages]);
 
   useEffect(() => {
+    const mql = window.matchMedia("(max-width: 768px)");
+    const update = () => setPageSize(mql.matches ? 2 : 4);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage((p) => Math.min(p, Math.max(0, Math.ceil(PROJECTS.length / pageSize) - 1)));
+  }, [pageSize]);
+
+  useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
@@ -181,26 +194,27 @@ function Portfolio() {
 
       <LogTicker />
       <header className="fixed top-0 inset-x-0 z-30 border-b border-ember/40 bg-void/70 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.25em]">
-          <div className="flex items-center gap-3 text-warm-paper/70">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 py-3 flex items-center justify-between font-mono text-[10px] md:text-[11px] uppercase tracking-[0.1em] md:tracking-[0.25em]">
+          <div className="flex items-center gap-2 md:gap-3 text-warm-paper/70">
             <span className="w-2 h-2 rounded-full bg-hot-signal shadow-[0_0_8px_#FF6B4A]" />
             <span>root@dev</span>
             <span className="hidden md:inline text-warm-paper/40">
               — session {new Date().getFullYear()}
             </span>
           </div>
-          <nav className="flex items-center gap-5 text-warm-paper/60">
+          <nav className="flex items-center gap-3 md:gap-5 text-warm-paper/60">
             {[
-              ["#terminal", "01_boot"],
-              ["#about", "02_about"],
-              ["#work", "03_work"],
-              ["#contact", "04_contact"],
-            ].map(([href, label]) => (
+              ["#terminal", "01_boot", "boot"],
+              ["#about", "02_about", "about"],
+              ["#work", "03_work", "work"],
+              ["#contact", "04_contact", "contact"],
+            ].map(([href, fullLabel, shortLabel]) => (
               <a key={href} href={href} className="group hover:text-hot-signal transition-colors">
-                <span className="text-signal opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="hidden md:inline text-signal opacity-0 group-hover:opacity-100 transition-opacity">
                   &gt;{" "}
                 </span>
-                {label}
+                <span className="hidden md:inline">{fullLabel}</span>
+                <span className="md:hidden">{shortLabel}</span>
               </a>
             ))}
           </nav>
@@ -218,7 +232,6 @@ function Portfolio() {
           </div>
         </section>
 
-        {/* ── SECTION 2: ABOUT ── */}
         <section id="about" className="min-h-screen flex items-center px-6 py-24">
           <div className="mx-auto max-w-6xl w-full grid md:grid-cols-12 gap-8">
             <div className="md:col-span-5">
@@ -287,20 +300,9 @@ function Portfolio() {
           </div>
         </section>
 
-        {/* ── SECTION 3: WORK ── */}
         <section id="work" className="px-6 py-24">
           <div className="mx-auto max-w-6xl w-full">
             <div className="mb-8 flex items-end justify-between">
-              {/* <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-signal mb-4">
-                  // 03_work/
-                </p>
-                <h2 className="font-mono text-3xl md:text-5xl uppercase tracking-wider text-warm-paper text-signal-glow">
-                  selected
-                  <br />
-                  output
-                </h2>
-              </div> */}
               <span className="hidden md:block font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/40">
                 {PROJECTS.length} files · sorted by recency
               </span>
@@ -369,7 +371,6 @@ function Portfolio() {
               })}
             </div>
 
-            {/* ── PAGE SCRUBBER ── */}
             {totalPages > 1 && (
               <div className="mt-6 select-none">
                 <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/40 mb-2">
@@ -381,7 +382,6 @@ function Portfolio() {
                   onMouseDown={handleScrubberDown}
                   className="relative h-6 flex items-center cursor-pointer group/scrub"
                 >
-                  {/* track */}
                   <div className="relative w-full h-2 flex gap-[2px]">
                     {Array.from({ length: totalPages }).map((_, i) => (
                       <div
@@ -395,7 +395,6 @@ function Portfolio() {
                     ))}
                   </div>
 
-                  {/* draggable cursor knob */}
                   <div
                     className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-hot-signal shadow-[0_0_10px_rgba(255,107,74,0.9)] transition-all duration-300 pointer-events-none"
                     style={{
@@ -512,7 +511,6 @@ function Portfolio() {
           </div>
         </section>
 
-        {/* Footer status */}
         <footer className="relative z-10 border-t border-ember/40 bg-void/80 backdrop-blur-sm px-6 py-4">
           <div className="mx-auto max-w-7xl flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/40">
             <span>uptime: {new Date().getFullYear() - 2017}y</span>
