@@ -6,3 +6,5 @@ dist/
 .env
 .env.local
 gerar-commits.sh
+
+.wrangler/
