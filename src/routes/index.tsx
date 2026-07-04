@@ -491,6 +491,15 @@ function Portfolio() {
 
             <div className="mt-10 flex justify-center gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/50">
               <a
+                href="https://wa.me/5588921715211?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20falar%20sobre%20uma%20oportunidade!"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-hot-signal transition-colors"
+              >
+                whatsapp
+              </a>
+              <span className="text-ember">·</span>
+              <a
                 href="https://github.com/Guilherme-jpg-max"
                 target="_blank"
                 rel="noopener noreferrer"
