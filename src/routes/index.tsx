@@ -15,8 +15,8 @@ const PROJECTS = [
     name: "geo-fabril",
     stack: "C# · .NET · PostgreSQL",
     blurb:
-      "Factory georeferencing module for stock and production mapping. Cartesian (X, Y, Z) coordinate logic on top of C# APIs.",
-    status: "internal Box3 Software",
+      "Módulo de georreferenciamento fabril para mapeamento de estoque e produção. Lógica de coordenadas cartesianas (X, Y, Z) sobre APIs em C#.",
+    status: "Interno Box3 Software",
     github: null,
   },
   {
@@ -24,8 +24,8 @@ const PROJECTS = [
     name: "rateio-pagamentos",
     stack: "C# · .NET · React · TypeScript",
     blurb:
-      "Recurring payment split feature for a finance module. Backend business rules through an interactive React frontend, with precise percentage persistence.",
-    status: "internal Box3 Software",
+      "Funcionalidade de rateio de pagamentos recorrentes para um módulo financeiro. Regras de negócio no backend com frontend interativo em React, com persistência precisa dos percentuais.",
+    status: "Interno Box3 Software",
     github: null,
   },
   {
@@ -33,8 +33,8 @@ const PROJECTS = [
     name: "update-notification",
     stack: "C# · .NET · SQLite · React",
     blurb:
-      "Full API + client ecosystem for software update notifications: version control, smart alert dispatch with logging, and a release history dashboard.",
-    status: "internal Box3 Software",
+      "Ecossistema completo de API + cliente para notificação de atualizações de software: controle de versões, disparo inteligente de alertas com log e um painel de histórico de releases.",
+    status: "Interno Box3 Software",
     github: null,
   },
   {
@@ -46,73 +46,57 @@ const PROJECTS = [
     status: "Faculdade",
     github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
   },
-    {
+  {
     id: "05",
-    name: "technical-assistance",
-    stack: "Node.js · Express · MongoDB Atlas · Mongoose · JWT",
+    name: "Portfolio",
+    stack: "React 19 · TypeScript · TanStack Router · Tailwind v4",
     blurb:
-      "API REST para gerenciamento de uma assistência técnica, com controle de entrada de aparelhos, orçamentos e autenticação com segundo fator de segurança.",
-    status: "Faculdade",
-    github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
+      "Site pessoal com estética dark CRT/terminal, construído para reunir e apresentar meus projetos de forma direta e com identidade visual própria.",
+    status: "Pessoal",
+    github: "https://github.com/Guilherme-jpg-max/portfolio",
   },
-    {
+  {
     id: "06",
-    name: "technical-assistance",
-    stack: "Node.js · Express · MongoDB Atlas · Mongoose · JWT",
+    name: "chamados-app",
+    stack: "React · TypeScript · Vite · React Router v6 · Axios · React Select",
     blurb:
-      "API REST para gerenciamento de uma assistência técnica, com controle de entrada de aparelhos, orçamentos e autenticação com segundo fator de segurança.",
-    status: "Faculdade",
-    github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
+      "Teste técnico para vaga de estágio front-end: sistema de gerenciamento de chamados com autenticação JWT, listagem paginada, filtros, criação de registros e autocomplete assíncrono consumindo API REST.",
+    status: "Teste de estágio",
+    github: "https://github.com/Guilherme-jpg-max/Teste-frontend-Box3",
   },
-    {
+  {
     id: "07",
-    name: "technical-assistance",
-    stack: "Node.js · Express · MongoDB Atlas · Mongoose · JWT",
+    name: "projeto-front-mercado",
+    stack: "React 19 · TypeScript · Vite · Tailwind CSS · Axios · React Router",
     blurb:
-      "API REST para gerenciamento de uma assistência técnica, com controle de entrada de aparelhos, orçamentos e autenticação com segundo fator de segurança.",
-    status: "Faculdade",
-    github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
+      "Frontend de e-commerce de supermercado, com listagem de produtos, ofertas, página de detalhes, conta do usuário e notificações via toast, consumindo a API REST do backend.",
+    status: "Pessoal",
+    github: "https://github.com/Guilherme-jpg-max/projeto-front-mercado",
   },
-    {
+  {
     id: "08",
-    name: "technical-assistance",
-    stack: "Node.js · Express · MongoDB Atlas · Mongoose · JWT",
+    name: "back-end-mercado",
+    stack: "Node.js · Express · PostgreSQL · JWT · Bcrypt",
     blurb:
-      "API REST para gerenciamento de uma assistência técnica, com controle de entrada de aparelhos, orçamentos e autenticação com segundo fator de segurança.",
-    status: "Faculdade",
-    github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
-  },
-    {
-    id: "09",
-    name: "technical-assistance",
-    stack: "Node.js · Express · MongoDB Atlas · Mongoose · JWT",
-    blurb:
-      "API REST para gerenciamento de uma assistência técnica, com controle de entrada de aparelhos, orçamentos e autenticação com segundo fator de segurança.",
-    status: "Faculdade",
-    github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
-  },
-    {
-    id: "10",
-    name: "technical-assistance",
-    stack: "Node.js · Express · MongoDB Atlas · Mongoose · JWT",
-    blurb:
-      "API REST para gerenciamento de uma assistência técnica, com controle de entrada de aparelhos, orçamentos e autenticação com segundo fator de segurança.",
-    status: "Faculdade",
-    github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
+      "API REST completa para sistema de supermercado, com autenticação JWT, catálogo de produtos, carrinho e pedidos, painel administrativo com dashboard de estatísticas e proteção de rotas por papel.",
+    status: "Pessoal",
+    github: "https://github.com/Guilherme-jpg-max/back-end-mercado",
   },
 ];
 
-const STACK = [
-  "typescript",
-  "C#",
-  "JavaScript",
-  "python",
-  "react",
-  "postgres",
-  ".NET",
-  "docker",
-  "ASP NET CORE",
-  "websockets",
+const SKILL_GROUPS = [
+  {
+    label: "linguagens",
+    items: ["C#", "typescript", "JavaScript", "python"],
+  },
+  {
+    label: "frameworks",
+    items: [".NET", "ASP NET CORE", "react"],
+  },
+  {
+    label: "dados/infra",
+    items: ["SQL","postgres", "docker", "websockets"],
+  },
 ];
 
 function Portfolio() {
@@ -249,32 +233,33 @@ function Portfolio() {
                 trabalho.
               </h2>
             </div>
+
             <div className="md:col-span-7 space-y-6">
-              <div className="panel-ember p-6 rounded-md rotate-[-0.6deg] fade-up">
+              <div className="panel-ember p-6 rounded-md rotate-[-0.15deg] fade-up">
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-hot-signal mb-3">
-                  post-it #1
+                  ~/about.md · foco atual
                 </p>
                 <p className="font-serif text-lg leading-relaxed text-warm-paper/90">
-                  Atualmente atuo com Desenvolvimento de Software, com foco em C# e no ecossistema .NET,
-                  porém venho 
-                  Contribuindo para o desenvolvimento web com React e TypeScript, aplicando
-                  boas práticas de desenvolvimento.
+                  Atuo com desenvolvimento de software, com foco em C# e no ecossistema .NET,
+                  e venho ampliando essa base contribuindo também com o desenvolvimento web
+                  em React e TypeScript, sempre aplicando boas práticas de arquitetura e código.
                 </p>
               </div>
+
               <div
-                className="panel-ember p-6 rounded-md rotate-[0.4deg] fade-up"
+                className="panel-ember p-6 rounded-md rotate-[0.1deg] fade-up"
                 style={{ animationDelay: "120ms" }}
               >
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-hot-signal mb-3">
-                  post-it #2
+                  ~/experience.log · trajetória
                 </p>
                 <p className="font-serif text-lg leading-relaxed text-warm-paper/90">
-                  Minha trajetória inclui projetos práticos como o desenvolvimento de um
-                  sistema de gestão para uma lanchonete e a criação de uma plataforma de
-                  aluguel de bicicletas, que solidificaram minhas habilidades em lógica,
-                  modelagem de dados e entrega de software.
+                  Construí projetos práticos como um sistema de gestão para uma lanchonete
+                  e uma plataforma de aluguel de bicicletas — experiências que solidificaram
+                  minhas habilidades em lógica, modelagem de dados e entrega de software.
                 </p>
               </div>
+
               <div
                 className="panel-ember p-6 rounded-md fade-up"
                 style={{ animationDelay: "240ms" }}
@@ -282,14 +267,19 @@ function Portfolio() {
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-hot-signal mb-3">
                   ls ~/skills
                 </p>
-                <div className="flex flex-wrap gap-2 font-mono text-xs">
-                  {STACK.map((s) => (
-                    <span
-                      key={s}
-                      className="border border-ember px-2 py-1 text-warm-paper/80 hover:text-hot-signal hover:border-signal transition-colors"
-                    >
-                      {s}
-                    </span>
+                <div className="space-y-3">
+                  {SKILL_GROUPS.map((group) => (
+                    <div key={group.label} className="flex flex-wrap items-center gap-2 font-mono text-xs">
+                      <span className="text-warm-paper/40 w-24 shrink-0">{group.label}</span>
+                      {group.items.map((s) => (
+                        <span
+                          key={s}
+                          className="border border-ember px-2 py-1 text-warm-paper/80 hover:text-hot-signal hover:border-signal transition-colors"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </div>
