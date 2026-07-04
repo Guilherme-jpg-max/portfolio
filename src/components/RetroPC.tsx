@@ -119,16 +119,18 @@ export function RetroPC({
 
   return (
     <group ref={rigRef} position={[0, 0, 0]}>
-      <ambientLight intensity={0.05} color="#2B0A0A" />
-      <pointLight position={[-3, 2, -3]} intensity={0.35} color="#7A1414" distance={10} />
+      <ambientLight intensity={0.55} color="#7a3030" />
+      <pointLight position={[-3, 2, -3]} intensity={1.4} color="#c45050" distance={14} />
+      <pointLight position={[3, 1.5, 2]} intensity={1.1} color="#e08060" distance={14} />
+      <pointLight position={[0, 2.5, 2.5]} intensity={0.9} color="#f2b090" distance={12} />
 
       <group position={[0, 0.55, 0]}>
         <RoundedBox args={[2.4, 1.9, 1.5]} radius={0.08} smoothness={4} castShadow>
-          <meshStandardMaterial color="#180606" roughness={0.75} metalness={0.15} />
+          <meshStandardMaterial color="#4a1a1a" roughness={0.5} metalness={0.35} />
         </RoundedBox>
         <mesh position={[0, 0, 0.76]}>
           <boxGeometry args={[2.15, 1.6, 0.05]} />
-          <meshStandardMaterial color="#0a0202" roughness={0.5} />
+          <meshStandardMaterial color="#301010" roughness={0.35} metalness={0.4} />
         </mesh>
         <mesh position={[0, 0, 0.79]}>
           <planeGeometry args={[1.9, 1.35]} />
@@ -161,30 +163,30 @@ export function RetroPC({
         </mesh>
         <mesh position={[-0.85, -0.75, 0.78]}>
           <planeGeometry args={[0.35, 0.03]} />
-          <meshStandardMaterial color="#3a1010" emissive="#7A1414" emissiveIntensity={0.4} />
+          <meshStandardMaterial color="#4a1818" emissive="#9a2020" emissiveIntensity={0.5} />
         </mesh>
       </group>
 
       <mesh position={[0, -0.55, 0]}>
         <cylinderGeometry args={[0.12, 0.16, 0.3, 12]} />
-        <meshStandardMaterial color="#180606" roughness={0.7} />
+        <meshStandardMaterial color="#4a1a1a" roughness={0.5} metalness={0.3} />
       </mesh>
       <mesh position={[0, -0.72, 0]}>
         <boxGeometry args={[0.9, 0.05, 0.6]} />
-        <meshStandardMaterial color="#180606" roughness={0.7} />
+        <meshStandardMaterial color="#4a1a1a" roughness={0.5} metalness={0.3} />
       </mesh>
 
       <group position={[-1.9, -0.35, 0.1]}>
         <RoundedBox args={[0.7, 1.1, 1.0]} radius={0.04} smoothness={3} castShadow>
-          <meshStandardMaterial color="#160505" roughness={0.7} />
+          <meshStandardMaterial color="#451818" roughness={0.5} metalness={0.3} />
         </RoundedBox>
         <mesh position={[0.36, 0.15, 0]} rotation={[0, Math.PI / 2, 0]}>
           <circleGeometry args={[0.22, 20]} />
-          <meshStandardMaterial color="#0a0202" side={THREE.DoubleSide} />
+          <meshStandardMaterial color="#301010" side={THREE.DoubleSide} />
         </mesh>
         <mesh ref={fanRef} position={[0.37, 0.15, 0]} rotation={[0, Math.PI / 2, 0]}>
           <torusGeometry args={[0.18, 0.015, 6, 16]} />
-          <meshStandardMaterial color="#2a0808" emissive="#7A1414" emissiveIntensity={0.3} />
+          <meshStandardMaterial color="#5a1c1c" emissive="#c45050" emissiveIntensity={0.5} />
         </mesh>
         {[0, 1, 2, 3, 4].map((i) => (
           <mesh
@@ -193,7 +195,7 @@ export function RetroPC({
             rotation={[0, Math.PI / 2, (i * Math.PI * 2) / 5]}
           >
             <boxGeometry args={[0.005, 0.16, 0.04]} />
-            <meshStandardMaterial color="#1a0505" />
+            <meshStandardMaterial color="#401515" />
           </mesh>
         ))}
         <mesh position={[0.36, -0.45, 0]} rotation={[0, Math.PI / 2, 0]}>
@@ -209,7 +211,7 @@ export function RetroPC({
 
       <group position={[0, -0.78, 0.95]}>
         <RoundedBox args={[1.8, 0.08, 0.55]} radius={0.02} smoothness={3} castShadow receiveShadow>
-          <meshStandardMaterial color="#0f0303" roughness={0.55} metalness={0.25} />
+          <meshStandardMaterial color="#3a1414" roughness={0.4} metalness={0.4} />
         </RoundedBox>
         {Array.from({ length: 5 }).flatMap((_, row) =>
           Array.from({ length: 14 }).map((_, col) => (
@@ -219,7 +221,7 @@ export function RetroPC({
               castShadow
             >
               <boxGeometry args={[0.09, 0.04, 0.08]} />
-              <meshStandardMaterial color="#1a0606" roughness={0.6} />
+              <meshStandardMaterial color="#4f1e1e" roughness={0.45} />
             </mesh>
           )),
         )}
@@ -228,15 +230,45 @@ export function RetroPC({
       <group position={[1.7, -0.55, 0.6]}>
         <mesh castShadow>
           <cylinderGeometry args={[0.18, 0.15, 0.4, 20]} />
-          <meshStandardMaterial color="#1a0505" roughness={0.85} />
+          <meshStandardMaterial color="#4f1e1e" roughness={0.6} />
         </mesh>
         <mesh position={[0.22, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[0.09, 0.02, 8, 16]} />
-          <meshStandardMaterial color="#1a0505" roughness={0.85} />
+          <meshStandardMaterial color="#4f1e1e" roughness={0.6} />
         </mesh>
         <mesh position={[0, 0.19, 0]}>
           <circleGeometry args={[0.16, 20]} />
-          <meshStandardMaterial color="#0a0202" roughness={0.2} metalness={0.6} />
+          <meshStandardMaterial color="#301010" roughness={0.15} metalness={0.65} />
+        </mesh>
+      </group>
+
+      <group position={[-1.4, -0.62, 0.85]}>
+        <mesh castShadow>
+          <cylinderGeometry args={[0.14, 0.16, 0.5, 16]} />
+          <meshStandardMaterial color="#451818" roughness={0.55} />
+        </mesh>
+        <mesh position={[0, 0.1, 0.15]} rotation={[Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[0.11, 20]} />
+          <meshStandardMaterial color="#2a0e0e" roughness={0.4} metalness={0.3} />
+        </mesh>
+        <mesh position={[0, -0.05, 0.15]} rotation={[Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[0.08, 20]} />
+          <meshStandardMaterial color="#2a0e0e" roughness={0.4} metalness={0.3} />
+        </mesh>
+      </group>
+
+      <group position={[1.15, -0.62, 0.95]}>
+        <mesh castShadow>
+          <cylinderGeometry args={[0.11, 0.1, 0.16, 16]} />
+          <meshStandardMaterial color="#e8ddc8" roughness={0.35} metalness={0.05} />
+        </mesh>
+        <mesh position={[0.13, 0, 0]} rotation={[0, 0, 0]}>
+          <torusGeometry args={[0.06, 0.015, 8, 16]} />
+          <meshStandardMaterial color="#e8ddc8" roughness={0.35} metalness={0.05} />
+        </mesh>
+        <mesh position={[0, 0.075, 0]}>
+          <circleGeometry args={[0.095, 16]} />
+          <meshStandardMaterial color="#2a1508" roughness={0.3} />
         </mesh>
       </group>
     </group>
