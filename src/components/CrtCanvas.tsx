@@ -22,7 +22,6 @@ const SCREEN_WIDTH = 1.9;
 const SCREEN_HEIGHT = 1.35;
 const SCREEN_Z = 0.79;
 
-// margem: >1 = sobra um pouco de espaço nas bordas da tela
 const FIT_MARGIN = 1.15;
 
 function getMobileDistance(fovDeg: number, aspect: number) {
@@ -37,7 +36,6 @@ function getMobileDistance(fovDeg: number, aspect: number) {
 
   const dist = Math.max(distForWidth, distForHeight);
 
-  // clamp generoso: só evita casos absurdos, não deve interferir no uso normal
   return THREE.MathUtils.clamp(dist, 1.8, 8);
 }
 
@@ -111,8 +109,8 @@ export function CrtCanvas({ progress }: { progress: number }) {
     const mql = window.matchMedia("(max-width: 768px)");
     const update = () => setIsMobile(mql.matches);
 
-    update(); // checa o estado assim que monta
-    mql.addEventListener("change", update); // reage a resize/rotação de tela
+    update();
+    mql.addEventListener("change", update);
 
     const onMove = (e: MouseEvent) => {
       setMouse({
@@ -135,18 +133,18 @@ export function CrtCanvas({ progress }: { progress: number }) {
       gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
       style={{ background: "#0F0505" }}
     >
-      <fog attach="fog" args={isMobile ? ["#0F0505", 6, 12] : ["#0F0505", 4, 10]} />
+      <fog attach="fog" args={isMobile ? ["#0F0505", 10, 20] : ["#0F0505", 8, 18]} />
       <Suspense fallback={null}>
         <RetroPC mouseX={mouse.x} mouseY={mouse.y} scrollProgress={progress} />
         <ScrollCamera progress={progress} mouseX={mouse.x} mouseY={mouse.y} isMobile={isMobile} />
         <EffectComposer multisampling={0}>
           <Bloom
-            intensity={isMobile ? 0.9 : 1.4}
-            luminanceThreshold={0.15}
+            intensity={isMobile ? 0.7 : 1.0}
+            luminanceThreshold={0.35}
             luminanceSmoothing={0.4}
             mipmapBlur
           />
-          <Vignette eskil={false} offset={0.2} darkness={0.9} />
+          <Vignette eskil={false} offset={0.4} darkness={0.4} />
         </EffectComposer>
       </Suspense>
     </Canvas>
