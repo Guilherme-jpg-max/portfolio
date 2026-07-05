@@ -73,13 +73,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "root@dev:~ — full-stack developer portfolio" },
+      { title: "guilhermecarlos@portfolio:~$" },
       {
         name: "description",
         content:
           "Portfolio of a full-stack developer. Front-end, back-end. Currently accepting new projects.",
       },
-      { property: "og:title", content: "root@dev:~ — full-stack developer" },
+      { property: "og:title", content: "guilhermecarlos@portfolio:~$" },
       {
         property: "og:description",
         content: "Front-end, back-end. A terminal-lit portfolio.",
