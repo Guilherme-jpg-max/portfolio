@@ -6,5 +6,6 @@ dist/
 .env
 .env.local
 gerar-commits.sh
-
+Add-Content .gitignore "`n.dev.vars"
 .wrangler/
+.dev.vars

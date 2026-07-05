@@ -105,6 +105,7 @@ function Portfolio() {
   const [bootDone, setBootDone] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   // ── paginação dos projetos ──
   const [pageSize, setPageSize] = useState(4);
@@ -427,11 +428,30 @@ function Portfolio() {
             </h2>
             <form
               className="panel-ember crt-flicker p-6 md:p-10 rounded-md font-mono text-sm"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 const form = e.currentTarget as HTMLFormElement;
-                form.reset();
-                (document.getElementById("send-ack") as HTMLElement).style.opacity = "1";
+                const formData = new FormData(form);
+                const name = formData.get("name") as string;
+                const email = formData.get("email") as string;
+                const message = formData.get("message") as string;
+
+                setStatus("sending");
+
+                try {
+                  const res = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, message }),
+                  });
+
+                  if (!res.ok) throw new Error("Falha no envio");
+
+                  form.reset();
+                  setStatus("sent");
+                } catch {
+                  setStatus("error");
+                }
               }}
             >
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-ember/60">
@@ -446,6 +466,7 @@ function Portfolio() {
                 <span className="text-warm-paper/60">--name</span>
                 <input
                   required
+                  name="name"
                   type="text"
                   className="mt-1 w-full bg-transparent border-b border-ember focus:border-signal outline-none py-2 text-warm-paper placeholder:text-warm-paper/30"
                   placeholder="your name"
@@ -457,6 +478,7 @@ function Portfolio() {
                 <span className="text-warm-paper/60">--reply-to</span>
                 <input
                   required
+                  name="email"
                   type="email"
                   className="mt-1 w-full bg-transparent border-b border-ember focus:border-signal outline-none py-2 text-warm-paper placeholder:text-warm-paper/30"
                   placeholder="you@domain.tld"
@@ -468,6 +490,7 @@ function Portfolio() {
                 <span className="text-warm-paper/60">--message</span>
                 <textarea
                   required
+                  name="message"
                   rows={4}
                   className="mt-1 w-full bg-transparent border border-ember focus:border-signal outline-none p-3 text-warm-paper placeholder:text-warm-paper/30 resize-none"
                   placeholder="what are you building?"
@@ -476,17 +499,23 @@ function Portfolio() {
 
               <button
                 type="submit"
-                className="w-full border border-signal bg-signal/10 hover:bg-signal/25 text-warm-paper font-mono uppercase tracking-[0.3em] text-xs py-3 transition-all hover:text-hot-glow"
+                disabled={status === "sending"}
+                className="w-full border border-signal bg-signal/10 hover:bg-signal/25 text-warm-paper font-mono uppercase tracking-[0.3em] text-xs py-3 transition-all hover:text-hot-glow disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                $ send --now
+                {status === "sending" ? "$ sending..." : "$ send --now"}
               </button>
 
-              <div
-                id="send-ack"
-                className="mt-4 text-center text-[11px] text-hot-signal opacity-0 transition-opacity"
-              >
-                {"> transmission acknowledged. reply within 48h."}
-              </div>
+              {status === "sent" && (
+                <div className="mt-4 text-center text-[11px] text-hot-signal">
+                  {"> transmission acknowledged. reply within 48h."}
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="mt-4 text-center text-[11px] text-red-400">
+                  {"> transmission failed. try whatsapp instead."}
+                </div>
+              )}
             </form>
 
             <div className="mt-10 flex justify-center gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/50">
