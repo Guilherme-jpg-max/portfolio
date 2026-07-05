@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CrtCanvas } from "@/components/CrtCanvas";
-import { BootSequence } from "@/components/BootSequence";
 import { LogTicker } from "@/components/LogTicker";
 import { Github, Lock, Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -516,6 +516,13 @@ function Portfolio() {
               >
                 linkedin
               </a>
+              <span className="text-ember">·</span>
+              <Link
+                to="/curriculo"
+                className="hover:text-hot-signal transition-colors"
+              >
+                currículo
+              </Link>
             </div>
           </div>
         </section>
