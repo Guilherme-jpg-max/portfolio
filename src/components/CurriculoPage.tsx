@@ -11,8 +11,8 @@ const EXPERIENCIAS = [
   {
     cargo: "Desenvolvedor Full Stack",
     empresa: "Box3 Software",
-    tag: "Estágio · Cargo Atual",
-    periodo: "out/2025 – Presente",
+    tag: "Estágio",
+    periodo: "out/2025 – jul/2026",
     destaque: true,
     bullets: [
       "Atuação presencial com clientes: visitação às operações das empresas parceiras, mapeamento de fluxos de trabalho reais e coleta de requisitos com usuários finais.",
@@ -80,7 +80,6 @@ export function CurriculoPage() {
   return (
     <main className="min-h-screen bg-black text-warm-paper/80 font-mono px-6 py-16 sm:px-12">
       <div className="mx-auto max-w-3xl">
-        {/* header */}
         <div className="mb-12">
           <Link
             to="/"
@@ -105,7 +104,6 @@ export function CurriculoPage() {
           </a>
         </div>
 
-        {/* resumo */}
         <Section title="resumo">
           <p className="text-sm leading-relaxed text-warm-paper/70">
             Desenvolvedor Full Stack com formação em andamento em Sistemas de
@@ -118,7 +116,6 @@ export function CurriculoPage() {
           </p>
         </Section>
 
-        {/* stack */}
         <Section title="stack">
           <div className="grid gap-4 sm:grid-cols-2">
             {Object.entries(STACK).map(([categoria, itens]) => (
@@ -195,7 +192,6 @@ export function CurriculoPage() {
           </div>
         </Section>
 
-        {/* formação */}
         <Section title="formação">
           <h3 className="text-sm font-semibold text-warm-paper">
             Bacharelado em Sistemas de Informação
@@ -216,7 +212,6 @@ export function CurriculoPage() {
           </p>
         </Section>
 
-        {/* competências + idiomas */}
         <div className="grid gap-8 sm:grid-cols-2">
           <Section title="competências">
             <ul className="space-y-2 text-[13px] leading-relaxed text-warm-paper/60">
@@ -235,7 +230,6 @@ export function CurriculoPage() {
           </Section>
         </div>
 
-        {/* contato */}
         <div className="mt-16 pt-8 border-t border-warm-paper/10 flex justify-center gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/50">
           <a
             href="https://wa.me/5588921715211?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20falar%20sobre%20uma%20oportunidade!"
