@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "0 6 * * *" # todo dia às 06:00 UTC
   workflow_dispatch:
+  # Roda também quando a própria lógica de contagem muda.
+  push:
+    branches: [main]
+    paths:
+      - scripts/update-commit-stats.ts
+      - .github/workflows/update-commit-stats.yml
 
 jobs:
   update-stats:
@@ -13,19 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch contribution total
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Somar contribuições desde a criação da conta
         env:
           GH_TOKEN: ${{ secrets.COMMIT_STATS_TOKEN }}
-        run: |
-          RESPONSE=$(curl -s -H "Authorization: bearer $GH_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d '{"query":"query { viewer { contributionsCollection { contributionCalendar { totalContributions } } } } "}' \
-            https://api.github.com/graphql)
-
-          TOTAL=$(echo "$RESPONSE" | jq -r '.data.viewer.contributionsCollection.contributionCalendar.totalContributions')
-
-          mkdir -p src/data
-          echo "{\"total\": $TOTAL, \"updatedAt\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > src/data/commit-stats.json
+        run: node scripts/update-commit-stats.ts
 
       - name: Commit if changed
         run: |
