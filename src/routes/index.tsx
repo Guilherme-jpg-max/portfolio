@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, type LinkProps } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CrtCanvas } from "@/components/CrtCanvas";
 import { LogTicker } from "@/components/LogTicker";
-import { Link } from "@tanstack/react-router";
-import { Github, Lock, MessageCircle, Linkedin, FileText } from "lucide-react";
+import { SmartLink } from "@/components/SmartLink";
+import { Github, Lock, MessageCircle, Linkedin, FileText, type LucideIcon } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -84,6 +84,13 @@ const PROJECTS = [
   },
 ];
 
+type Channel = {
+  id: string;
+  label: string;
+  detail: string;
+  icon: LucideIcon;
+} & ({ href: string; to?: never } | { to: LinkProps["to"]; href?: never });
+
 const CHANNELS = [
   {
     id: "01",
@@ -110,11 +117,10 @@ const CHANNELS = [
     id: "05",
     label: "currículo",
     detail: "PDF completo",
-    href: "/curriculo",
+    to: "/curriculo",
     icon: FileText,
-    internal: true,
   },
-];
+] satisfies Channel[];
 
 const SKILL_GROUPS = [
   {
@@ -144,10 +150,7 @@ function Portfolio() {
   const scrubberRef = useRef<HTMLDivElement>(null);
 
   const totalPages = Math.ceil(PROJECTS.length / pageSize);
-  const pagedProjects = PROJECTS.slice(
-    currentPage * pageSize,
-    currentPage * pageSize + pageSize
-  );
+  const pagedProjects = PROJECTS.slice(currentPage * pageSize, currentPage * pageSize + pageSize);
 
   const goToPage = (page: number) => {
     setCurrentPage(Math.min(Math.max(page, 0), totalPages - 1));
@@ -254,7 +257,10 @@ function Portfolio() {
       </header>
 
       <main className="relative z-10">
-        <section id="terminal" className="relative min-h-screen flex items-center justify-center px-6 pt-24">
+        <section
+          id="terminal"
+          className="relative min-h-screen flex items-center justify-center px-6 pt-24"
+        >
           <div
             className={`absolute bottom-10 left-1/2 -translate-x-1/2 text-center font-mono text-[10px] uppercase tracking-[0.4em] text-warm-paper/40 transition-opacity ${
               bootDone ? "opacity-100" : "opacity-0"
@@ -285,9 +291,9 @@ function Portfolio() {
                   ~/about.md · foco atual
                 </p>
                 <p className="font-serif text-lg leading-relaxed text-warm-paper/90">
-                  Sou desenvolvedor Full Stack Jr, estudante do 7º semestre de Sistemas de Informação
-                  no IFCE. Atuei como estagiário na Box3 Software, trabalhando com C# e .NET no
-                  back-end e React/TypeScript no front-end.
+                  Sou desenvolvedor Full Stack Jr, estudante do 7º semestre de Sistemas de
+                  Informação no IFCE. Atuei como estagiário na Box3 Software, trabalhando com C# e
+                  .NET no back-end e React/TypeScript no front-end.
                 </p>
               </div>
 
@@ -299,10 +305,10 @@ function Portfolio() {
                   ~/experience.log · trajetória
                 </p>
                 <p className="font-serif text-lg leading-relaxed text-warm-paper/90">
-                  No meu estágio anterior desenvolvi um módulo de georreferenciamento fabril com lógica de
-                  coordenadas cartesianas e a funcionalidade completa de rateio de pagamentos
-                  recorrentes, do back-end ao front-end. Também refatorei código legado de jQuery
-                  para React/TypeScript.
+                  No meu estágio anterior desenvolvi um módulo de georreferenciamento fabril com
+                  lógica de coordenadas cartesianas e a funcionalidade completa de rateio de
+                  pagamentos recorrentes, do back-end ao front-end. Também refatorei código legado
+                  de jQuery para React/TypeScript.
                 </p>
               </div>
 
@@ -315,7 +321,10 @@ function Portfolio() {
                 </p>
                 <div className="space-y-3">
                   {SKILL_GROUPS.map((group) => (
-                    <div key={group.label} className="flex flex-wrap items-center gap-2 font-mono text-xs">
+                    <div
+                      key={group.label}
+                      className="flex flex-wrap items-center gap-2 font-mono text-xs"
+                    >
                       <span className="text-warm-paper/40 w-24 shrink-0">{group.label}</span>
                       {group.items.map((s) => (
                         <span
@@ -441,7 +450,8 @@ function Portfolio() {
                     [h] prev · [l] next · click to jump
                   </span>
                   <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-hot-signal">
-                    {currentPage + 1}/{totalPages} pages · {Math.round(((currentPage + 1) / totalPages) * 100)}%
+                    {currentPage + 1}/{totalPages} pages ·{" "}
+                    {Math.round(((currentPage + 1) / totalPages) * 100)}%
                   </span>
                 </div>
               </div>
@@ -465,15 +475,12 @@ function Portfolio() {
             <div className="grid sm:grid-cols-2 gap-3">
               {CHANNELS.map((c, i) => {
                 const Icon = c.icon;
-                const linkProps = c.internal
-                  ? { to: c.href }
-                  : { href: c.href, target: "_blank", rel: "noopener noreferrer" };
-                const Wrapper: any = c.internal ? Link : "a";
+                const target = c.to !== undefined ? { to: c.to } : { href: c.href };
 
                 return (
-                  <Wrapper
+                  <SmartLink
                     key={c.id}
-                    {...linkProps}
+                    {...target}
                     className="panel-ember p-5 rounded-md group relative overflow-hidden fade-up flex items-center gap-4"
                     style={{ animationDelay: `${i * 80}ms` }}
                   >
@@ -498,7 +505,7 @@ function Portfolio() {
                     <span className="relative ml-auto font-mono text-warm-paper/30 group-hover:text-hot-signal transition-colors">
                       →
                     </span>
-                  </Wrapper>
+                  </SmartLink>
                 );
               })}
             </div>

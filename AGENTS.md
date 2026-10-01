@@ -14,7 +14,6 @@ Portfólio full-stack em **TanStack Start** (React + Vite + Nitro).
 
 Veja `src/routes/README.md` — roteamento baseado em arquivos do TanStack Router.
 
-
 ## Scripts
 
 - `npm run dev` — servidor de desenvolvimento

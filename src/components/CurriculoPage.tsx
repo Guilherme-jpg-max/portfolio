@@ -114,7 +114,16 @@ export function CurriculoPage() {
 
         <Section title="resumo">
           <p className="text-sm leading-relaxed text-warm-paper/70">
-            Estudante do 7º semestre de Sistemas de Informação no IFCE, com propósito de construir soluções de software que resolvam problemas reais de negócio. Atuei recentemente como Desenvolvedor Full Stack na Box3 Software, trabalhando com C#, .NET e React/TypeScript no desenvolvimento de sistemas desde o levantamento de requisitos com usuários finais até a entrega de funcionalidades do back-end ao front-end. Antes disso, atuei como Tutor de Programação na Kodland Brasil, ensinando lógica de programação e Python. Tenho também uma trajetória anterior em atendimento ao cliente e gestão administrativa, que me deu uma base sólida em comunicação, resolução de conflitos e organização. Busco novas oportunidades para continuar crescendo como desenvolvedor full stack em times que valorizem código bem estruturado, aprendizado constante e colaboração.
+            Estudante do 7º semestre de Sistemas de Informação no IFCE, com propósito de construir
+            soluções de software que resolvam problemas reais de negócio. Atuei recentemente como
+            Desenvolvedor Full Stack na Box3 Software, trabalhando com C#, .NET e React/TypeScript
+            no desenvolvimento de sistemas desde o levantamento de requisitos com usuários finais
+            até a entrega de funcionalidades do back-end ao front-end. Antes disso, atuei como Tutor
+            de Programação na Kodland Brasil, ensinando lógica de programação e Python. Tenho também
+            uma trajetória anterior em atendimento ao cliente e gestão administrativa, que me deu
+            uma base sólida em comunicação, resolução de conflitos e organização. Busco novas
+            oportunidades para continuar crescendo como desenvolvedor full stack em times que
+            valorizem código bem estruturado, aprendizado constante e colaboração.
           </p>
         </Section>
 
@@ -146,7 +155,11 @@ export function CurriculoPage() {
             {EXPERIENCIAS.map((exp) => (
               <div
                 key={exp.cargo + exp.empresa}
-                className={exp.destaque ? "border-l-2 border-hot-signal pl-4" : "pl-4 border-l border-warm-paper/10"}
+                className={
+                  exp.destaque
+                    ? "border-l-2 border-hot-signal pl-4"
+                    : "pl-4 border-l border-warm-paper/10"
+                }
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="text-sm font-semibold text-warm-paper">
@@ -161,7 +174,10 @@ export function CurriculoPage() {
                 )}
                 <ul className="mt-2 space-y-1.5">
                   {exp.bullets.map((b) => (
-                    <li key={b} className="text-[13px] leading-relaxed text-warm-paper/60 flex gap-2">
+                    <li
+                      key={b}
+                      className="text-[13px] leading-relaxed text-warm-paper/60 flex gap-2"
+                    >
                       <span className="text-ember">›</span>
                       <span>{b}</span>
                     </li>
@@ -178,12 +194,16 @@ export function CurriculoPage() {
             {PROJETOS.map((proj) => (
               <div key={proj.nome}>
                 <h3 className="text-sm font-semibold text-warm-paper">
-                  {proj.nome} {proj.tag && <span className="text-warm-paper/40 text-[11px]">({proj.tag})</span>}
+                  {proj.nome}{" "}
+                  {proj.tag && <span className="text-warm-paper/40 text-[11px]">({proj.tag})</span>}
                 </h3>
                 <p className="text-[11px] text-ember mt-0.5">{proj.stack}</p>
                 <ul className="mt-2 space-y-1.5">
                   {proj.bullets.map((b) => (
-                    <li key={b} className="text-[13px] leading-relaxed text-warm-paper/60 flex gap-2">
+                    <li
+                      key={b}
+                      className="text-[13px] leading-relaxed text-warm-paper/60 flex gap-2"
+                    >
                       <span className="text-ember">›</span>
                       <span>{b}</span>
                     </li>
@@ -201,15 +221,13 @@ export function CurriculoPage() {
           <p className="text-[13px] text-warm-paper/60 mt-1">
             Instituto Federal de Ciência e Tecnologia do Ceará (IFCE) — Crato, CE
           </p>
-          <p className="text-[11px] text-warm-paper/40 mt-1">
-            Previsão de formatura: dez/2026
-          </p>
+          <p className="text-[11px] text-warm-paper/40 mt-1">Previsão de formatura: dez/2026</p>
           <p className="text-[13px] leading-relaxed text-warm-paper/60 mt-2 flex gap-2">
             <span className="text-ember">›</span>
             <span>
-              Atividade recente: desenvolvimento de TCC focado em Sistema de
-              Georreferenciamento para Monitoramento de Anomalias e Gestão de
-              Zonas de Manejo na Irrigação por Gotejamento da Bananicultura.
+              Atividade recente: desenvolvimento de TCC focado em Sistema de Georreferenciamento
+              para Monitoramento de Anomalias e Gestão de Zonas de Manejo na Irrigação por
+              Gotejamento da Bananicultura.
             </span>
           </p>
         </Section>
@@ -217,10 +235,22 @@ export function CurriculoPage() {
         <div className="grid gap-8 sm:grid-cols-2">
           <Section title="competências">
             <ul className="space-y-2 text-[13px] leading-relaxed text-warm-paper/60">
-              <li><span className="text-ember">›</span> Comunicação clara e objetiva, com facilidade para transmitir conceitos técnicos.</li>
-              <li><span className="text-ember">›</span> Rapidez e autonomia para aprender novas tecnologias e metodologias.</li>
-              <li><span className="text-ember">›</span> Proatividade para identificar melhorias, refatorar código legado e propor soluções otimizadas.</li>
-              <li><span className="text-ember">›</span> Colaboração em equipes multifuncionais e ambientes remotos.</li>
+              <li>
+                <span className="text-ember">›</span> Comunicação clara e objetiva, com facilidade
+                para transmitir conceitos técnicos.
+              </li>
+              <li>
+                <span className="text-ember">›</span> Rapidez e autonomia para aprender novas
+                tecnologias e metodologias.
+              </li>
+              <li>
+                <span className="text-ember">›</span> Proatividade para identificar melhorias,
+                refatorar código legado e propor soluções otimizadas.
+              </li>
+              <li>
+                <span className="text-ember">›</span> Colaboração em equipes multifuncionais e
+                ambientes remotos.
+              </li>
             </ul>
           </Section>
 
@@ -268,9 +298,7 @@ export function CurriculoPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-10">
-      <p className="text-[10px] uppercase tracking-[0.3em] text-ember mb-3">
-        # {title}
-      </p>
+      <p className="text-[10px] uppercase tracking-[0.3em] text-ember mb-3"># {title}</p>
       {children}
     </section>
   );

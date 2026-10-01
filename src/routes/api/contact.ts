@@ -13,10 +13,10 @@ export const Route = createFileRoute("/api/contact")({
         const { name, email, message } = body;
 
         if (!name || !email || !message) {
-          return new Response(
-            JSON.stringify({ error: "Preencha todos os campos." }),
-            { status: 400, headers: { "Content-Type": "application/json" } },
-          );
+          return new Response(JSON.stringify({ error: "Preencha todos os campos." }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          });
         }
 
         const resendRes = await fetch("https://api.resend.com/emails", {
@@ -36,10 +36,10 @@ export const Route = createFileRoute("/api/contact")({
 
         if (!resendRes.ok) {
           console.error("Resend error:", await resendRes.text());
-          return new Response(
-            JSON.stringify({ error: "Falha ao enviar a mensagem." }),
-            { status: 502, headers: { "Content-Type": "application/json" } },
-          );
+          return new Response(JSON.stringify({ error: "Falha ao enviar a mensagem." }), {
+            status: 502,
+            headers: { "Content-Type": "application/json" },
+          });
         }
 
         return new Response(JSON.stringify({ ok: true }), {

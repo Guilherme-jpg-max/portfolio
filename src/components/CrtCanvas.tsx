@@ -70,11 +70,7 @@ function ScrollCamera({
       const parallaxX = 0.03;
       const parallaxY = 0.02;
 
-      desired.current.set(
-        mouseX * parallaxX,
-        lookY + mouseY * parallaxY,
-        SCREEN_Z + distance,
-      );
+      desired.current.set(mouseX * parallaxX, lookY + mouseY * parallaxY, SCREEN_Z + distance);
       target.current.set(0, lookY, SCREEN_Z);
     } else {
       const p = Math.max(0, Math.min(1, progress)) * (WAYPOINTS.length - 1);

@@ -14,7 +14,10 @@ const LINES: Line[] = [
   { text: "Initializing shell ................... [ OK ]", delay: 300 },
   { text: "" },
   { text: "root@dev:~$ whoami", className: "text-hot-glow", delay: 400 },
-  { text: "> Guilherme Carlos", className: "text-signal-glow text-2xl md:text-4xl tracking-widest" },
+  {
+    text: "> Guilherme Carlos",
+    className: "text-signal-glow text-2xl md:text-4xl tracking-widest",
+  },
   { text: "> full-stack developer / systems", className: "text-warm-paper/80" },
   { text: "" },
   { text: "root@dev:~$ cat status.txt", className: "text-hot-glow", delay: 500 },

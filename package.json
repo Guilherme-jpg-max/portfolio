@@ -4,14 +4,17 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-      "dev": "vite dev",
-      "build": "vite build",
-      "build:dev": "vite build --mode development",
-      "preview": "vite preview",
-      "deploy": "npm run build && wrangler deploy",
-      "cf-typegen": "wrangler types",
-      "lint": "eslint .",
-      "format": "prettier --write ."
+    "dev": "vite dev",
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
