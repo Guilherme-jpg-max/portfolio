@@ -1,141 +1,25 @@
-import { createFileRoute, type LinkProps } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CrtCanvas } from "@/components/CrtCanvas";
 import { LogTicker } from "@/components/LogTicker";
 import { SmartLink } from "@/components/SmartLink";
-import { Github, Lock, MessageCircle, Linkedin, FileText, type LucideIcon } from "lucide-react";
+import { FileText, Github, Linkedin, Lock, MessageCircle, type LucideIcon } from "lucide-react";
+import { channels } from "@/content/channels";
+import { profile } from "@/content/profile";
+import { projects } from "@/content/projects";
+import { skillGroups } from "@/content/skills";
+import type { ChannelKind } from "@/content/types";
+
+const CHANNEL_ICONS: Record<ChannelKind, LucideIcon> = {
+  whatsapp: MessageCircle,
+  linkedin: Linkedin,
+  github: Github,
+  resume: FileText,
+};
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
 });
-
-const PROJECTS = [
-  {
-    id: "01",
-    name: "geo-fabril",
-    stack: "C# · .NET · PostgreSQL",
-    blurb:
-      "Módulo de georreferenciamento fabril para mapeamento de estoque e produção. Lógica de coordenadas cartesianas (X, Y, Z) sobre APIs em C#.",
-    status: "Interno Box3 Software",
-    github: null,
-  },
-  {
-    id: "02",
-    name: "rateio-pagamentos",
-    stack: "C# · .NET · React · TypeScript",
-    blurb:
-      "Funcionalidade de rateio de pagamentos recorrentes para um módulo financeiro. Regras de negócio no backend com frontend interativo em React, com persistência precisa dos percentuais.",
-    status: "Interno Box3 Software",
-    github: null,
-  },
-  {
-    id: "03",
-    name: "update-notification",
-    stack: "C# · .NET · SQLite · React",
-    blurb:
-      "Ecossistema completo de API + cliente para notificação de atualizações de software: controle de versões, disparo inteligente de alertas com log e um painel de histórico de releases.",
-    status: "Interno Box3 Software",
-    github: null,
-  },
-  {
-    id: "04",
-    name: "technical-assistance",
-    stack: "Node.js · Express · MongoDB Atlas · Mongoose · JWT",
-    blurb:
-      "API REST para gerenciamento de uma assistência técnica, com controle de entrada de aparelhos, orçamentos e autenticação com segundo fator de segurança.",
-    status: "Faculdade",
-    github: "https://github.com/Guilherme-jpg-max/Technical-assistance",
-  },
-  {
-    id: "05",
-    name: "Portfolio",
-    stack: "React 19 · TypeScript · TanStack Router · Tailwind v4",
-    blurb:
-      "Site pessoal com estética dark CRT/terminal, construído para reunir e apresentar meus projetos de forma direta e com identidade visual própria.",
-    status: "Pessoal",
-    github: "https://github.com/Guilherme-jpg-max/portfolio",
-  },
-  {
-    id: "06",
-    name: "chamados-app",
-    stack: "React · TypeScript · Vite · React Router v6 · Axios · React Select",
-    blurb:
-      "Teste técnico para vaga de estágio front-end: sistema de gerenciamento de chamados com autenticação JWT, listagem paginada, filtros, criação de registros e autocomplete assíncrono consumindo API REST.",
-    status: "Teste de estágio",
-    github: "https://github.com/Guilherme-jpg-max/Teste-frontend-Box3",
-  },
-  {
-    id: "07",
-    name: "projeto-front-mercado",
-    stack: "React 19 · TypeScript · Vite · Tailwind CSS · Axios · React Router",
-    blurb:
-      "Frontend de e-commerce de supermercado, com listagem de produtos, ofertas, página de detalhes, conta do usuário e notificações via toast, consumindo a API REST do backend.",
-    status: "Pessoal",
-    github: "https://github.com/Guilherme-jpg-max/projeto-front-mercado",
-  },
-  {
-    id: "08",
-    name: "back-end-mercado",
-    stack: "Node.js · Express · PostgreSQL · JWT · Bcrypt",
-    blurb:
-      "API REST completa para sistema de supermercado, com autenticação JWT, catálogo de produtos, carrinho e pedidos, painel administrativo com dashboard de estatísticas e proteção de rotas por papel.",
-    status: "Pessoal",
-    github: "https://github.com/Guilherme-jpg-max/back-end-mercado",
-  },
-];
-
-type Channel = {
-  id: string;
-  label: string;
-  detail: string;
-  icon: LucideIcon;
-} & ({ href: string; to?: never } | { to: LinkProps["to"]; href?: never });
-
-const CHANNELS = [
-  {
-    id: "01",
-    label: "whatsapp",
-    detail: "resposta mais rápida",
-    href: "https://wa.me/5588921715211?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20falar%20sobre%20uma%20oportunidade!",
-    icon: MessageCircle,
-  },
-  {
-    id: "03",
-    label: "linkedin",
-    detail: "trajetória e recomendações",
-    href: "https://www.linkedin.com/in/guilhermecarlos03/",
-    icon: Linkedin,
-  },
-  {
-    id: "04",
-    label: "github",
-    detail: "código-fonte dos projetos",
-    href: "https://github.com/Guilherme-jpg-max",
-    icon: Github,
-  },
-  {
-    id: "05",
-    label: "currículo",
-    detail: "PDF completo",
-    to: "/curriculo",
-    icon: FileText,
-  },
-] satisfies Channel[];
-
-const SKILL_GROUPS = [
-  {
-    label: "linguagens",
-    items: ["C#", "typescript", "JavaScript", "python"],
-  },
-  {
-    label: "frameworks",
-    items: [".NET", "ASP NET CORE", "entity framework", "react", "tailwindcss"],
-  },
-  {
-    label: "dados/infra",
-    items: ["postgresql", "mysql", "sqlite", "dapper", "REST APIs"],
-  },
-];
 
 function Portfolio() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -147,8 +31,8 @@ function Portfolio() {
   const [currentPage, setCurrentPage] = useState(0);
   const scrubberRef = useRef<HTMLDivElement>(null);
 
-  const totalPages = Math.ceil(PROJECTS.length / pageSize);
-  const pagedProjects = PROJECTS.slice(currentPage * pageSize, currentPage * pageSize + pageSize);
+  const totalPages = Math.ceil(projects.length / pageSize);
+  const pagedProjects = projects.slice(currentPage * pageSize, currentPage * pageSize + pageSize);
 
   const goToPage = (page: number) => {
     setCurrentPage(Math.min(Math.max(page, 0), totalPages - 1));
@@ -192,7 +76,7 @@ function Portfolio() {
   }, []);
 
   useEffect(() => {
-    setCurrentPage((p) => Math.min(p, Math.max(0, Math.ceil(PROJECTS.length / pageSize) - 1)));
+    setCurrentPage((p) => Math.min(p, Math.max(0, Math.ceil(projects.length / pageSize) - 1)));
   }, [pageSize]);
 
   useEffect(() => {
@@ -318,7 +202,7 @@ function Portfolio() {
                   ls ~/skills
                 </p>
                 <div className="space-y-3">
-                  {SKILL_GROUPS.map((group) => (
+                  {skillGroups.map((group) => (
                     <div
                       key={group.label}
                       className="flex flex-wrap items-center gap-2 font-mono text-xs"
@@ -344,7 +228,7 @@ function Portfolio() {
           <div className="mx-auto max-w-6xl w-full">
             <div className="mb-8 flex items-end justify-between">
               <span className="hidden md:block font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/40">
-                {PROJECTS.length} files · sorted by recency
+                {projects.length} files · sorted by recency
               </span>
             </div>
 
@@ -357,7 +241,7 @@ function Portfolio() {
                   <Wrapper
                     key={p.id}
                     {...(!isPrivate && {
-                      href: p.github,
+                      href: p.github ?? undefined,
                       target: "_blank",
                       rel: "noopener noreferrer",
                     })}
@@ -471,8 +355,8 @@ function Portfolio() {
             </p>
 
             <div className="grid sm:grid-cols-2 gap-3">
-              {CHANNELS.map((c, i) => {
-                const Icon = c.icon;
+              {channels.map((c, i) => {
+                const Icon = CHANNEL_ICONS[c.kind];
                 const target = c.to !== undefined ? { to: c.to } : { href: c.href };
 
                 return (
@@ -512,7 +396,7 @@ function Portfolio() {
 
         <footer className="relative z-10 border-t border-ember/40 bg-void/80 backdrop-blur-sm px-6 py-4">
           <div className="mx-auto max-w-7xl flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/40">
-            <span>uptime: {new Date().getFullYear() - 2017}y</span>
+            <span>uptime: {new Date().getFullYear() - profile.careerStartYear}y</span>
             <span>
               status: <span className="text-hot-signal">available</span>
             </span>

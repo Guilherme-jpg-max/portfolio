@@ -2,7 +2,7 @@ import { useRef, useMemo, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
-import commitStats from "../data/commit-stats.json";
+import { bootScreenLines } from "@/content/boot";
 
 export function RetroPC({
   mouseX = 0,
@@ -31,25 +31,6 @@ export function RetroPC({
     return { texture, ctx, canvas };
   }, []);
 
-  const linesRef = useRef<string[]>([
-    "BIOS v2.4.1 — POST OK",
-    "mounting /dev/persona ......... [ OK ]",
-    "loading identity module ....... [ OK ]",
-    "init shell .................... [ OK ]",
-    "",
-    "root@dev:~$ whoami",
-    "> Guilherme Carlos",
-    "> full-stack Developer / systems",
-    "",
-    "root@dev:~$ status",
-    "available for new projects",
-    "",
-    "root@dev:~$ git log --all --oneline | wc -l",
-    `> ${commitStats.total.toLocaleString("pt-BR")} commits`,
-    "",
-    "root@dev:~$ _",
-  ]);
-
   const tick = useRef(0);
   useFrame((_, delta) => {
     tick.current += delta;
@@ -66,7 +47,7 @@ export function RetroPC({
     ctx.font = "600 16px 'JetBrains Mono', ui-monospace, monospace";
     ctx.textBaseline = "top";
     const pad = 20;
-    linesRef.current.forEach((line, i) => {
+    bootScreenLines.forEach((line, i) => {
       const isPrompt = line.startsWith("root@dev");
       ctx.fillStyle = isPrompt ? "#FF6B4A" : "#F2E8DC";
       const text = line.replace(/_$/, showCursor ? "▊" : " ");
