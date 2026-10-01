@@ -8,7 +8,7 @@
  *
  * Uso: GH_TOKEN=<token> node scripts/update-commit-stats.ts
  */
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 const GRAPHQL_URL = "https://api.github.com/graphql";
@@ -49,6 +49,15 @@ async function graphql<T>(query: string, token: string): Promise<T> {
   return payload.data;
 }
 
+async function readCurrentTotal(): Promise<number | null> {
+  try {
+    const { total } = JSON.parse(await readFile(OUTPUT_FILE, "utf8")) as { total?: unknown };
+    return typeof total === "number" ? total : null;
+  } catch {
+    return null;
+  }
+}
+
 async function main(): Promise<void> {
   const token = process.env.GH_TOKEN;
   if (!token) throw new Error("Defina GH_TOKEN com um token do GitHub.");
@@ -68,6 +77,14 @@ async function main(): Promise<void> {
   // Um total zerado indica falha na API, não ausência de commits: não grava.
   if (!Number.isInteger(total) || total <= 0) {
     throw new Error(`Total inválido (${total}); arquivo não atualizado.`);
+  }
+
+  // Só regrava quando o total muda: evita um commit (e um deploy) por dia
+  // apenas para atualizar a data.
+  const current = await readCurrentTotal();
+  if (current === total) {
+    console.log(`Total inalterado (${total}); nada a atualizar.`);
+    return;
   }
 
   const updatedAt = now.toISOString().replace(/\.\d{3}Z$/, "Z");

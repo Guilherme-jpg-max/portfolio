@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
 
@@ -28,10 +29,25 @@ jobs:
           GH_TOKEN: ${{ secrets.COMMIT_STATS_TOKEN }}
         run: node scripts/update-commit-stats.ts
 
-      - name: Commit if changed
+      - name: Commit se o total mudou
+        id: commit
         run: |
           git config user.name "commit-stats-bot"
           git config user.email "actions@github.com"
           git add src/data/commit-stats.json
-          git diff --staged --quiet || git commit -m "chore: update commit stats [skip ci]"
+          if git diff --staged --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "chore: update commit stats [skip ci]"
+          git pull --rebase origin main
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Commits feitos com o GITHUB_TOKEN não disparam outros workflows, então o
+      # CI (que testa e publica o site com o número novo) é chamado explicitamente.
+      - name: Disparar CI para publicar o novo total
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref main
