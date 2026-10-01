@@ -14,9 +14,11 @@ export function WorkSection() {
     isMobile ? PAGE_SIZE.mobile : PAGE_SIZE.desktop,
   );
 
-  // Navegação estilo vim: h/← volta, l/→ avança.
+  // Navegação estilo vim: h/← volta, l/→ avança. Atalhos com modificador
+  // (ex.: Ctrl+L) e teclas digitadas em campos de texto ficam com o navegador.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey || event.metaKey || event.altKey || isEditable(event.target)) return;
       if (event.key === "h" || event.key === "ArrowLeft") prev();
       if (event.key === "l" || event.key === "ArrowRight") next();
     };
@@ -49,5 +51,12 @@ export function WorkSection() {
         )}
       </div>
     </section>
+  );
+}
+
+function isEditable(target: EventTarget | null): boolean {
+  return (
+    target instanceof HTMLElement &&
+    (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName))
   );
 }

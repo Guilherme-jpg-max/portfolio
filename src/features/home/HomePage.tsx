@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { LogTicker } from "@/components/LogTicker";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { useIsClient } from "@/hooks/useIsClient";
 import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { SceneBackground } from "@/features/scene/SceneBackground";
@@ -17,6 +18,7 @@ export function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useScrollProgress(containerRef);
   const reducedMotion = usePrefersReducedMotion();
+  const isClient = useIsClient();
 
   return (
     <div ref={containerRef} className="relative bg-void text-warm-paper">
@@ -25,7 +27,7 @@ export function HomePage() {
       <SiteHeader />
 
       <main className="relative z-10">
-        <HeroSection showScrollHint={false} />
+        <HeroSection showScrollHint={isClient} />
         <AboutSection />
         <WorkSection />
         <ContactSection />

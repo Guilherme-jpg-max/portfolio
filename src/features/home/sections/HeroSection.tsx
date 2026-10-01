@@ -1,7 +1,7 @@
 import { cx } from "@/lib/cx";
 
 type Props = {
-  /** Exibe a dica de rolagem (com fade) quando `true`. */
+  /** Exibe a dica de rolagem (com fade) quando `true`; fica oculta no SSR. */
   showScrollHint: boolean;
 };
 

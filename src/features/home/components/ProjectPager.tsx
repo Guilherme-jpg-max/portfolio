@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent as ReactMouseEvent } from "react";
+import { useRef, type PointerEvent } from "react";
 import { pageFromRatio } from "@/hooks/usePagination";
 import { cx } from "@/lib/cx";
 
@@ -8,27 +8,27 @@ type Props = {
   onPageChange: (page: number) => void;
 };
 
-/** Barra de progresso clicável/arrastável no estilo terminal. */
+/**
+ * Barra de progresso no estilo terminal: clique, arraste (mouse ou toque) ou
+ * teclado escolhem a página. Exposta como slider para leitores de tela.
+ */
 export function ProjectPager({ currentPage, totalPages, onPageChange }: Props) {
   const scrubberRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseDown = (event: ReactMouseEvent<HTMLDivElement>) => {
-    const updateFromEvent = (ev: { clientX: number }) => {
-      const scrubber = scrubberRef.current;
-      if (!scrubber) return;
-      const rect = scrubber.getBoundingClientRect();
-      onPageChange(pageFromRatio((ev.clientX - rect.left) / rect.width, totalPages));
-    };
+  const jumpToPointer = (event: PointerEvent<HTMLDivElement>) => {
+    const scrubber = scrubberRef.current;
+    if (!scrubber) return;
+    const rect = scrubber.getBoundingClientRect();
+    onPageChange(pageFromRatio((event.clientX - rect.left) / rect.width, totalPages));
+  };
 
-    updateFromEvent(event);
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    jumpToPointer(event);
+  };
 
-    const onMove = (ev: MouseEvent) => updateFromEvent(ev);
-    const onUp = () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-    };
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) jumpToPointer(event);
   };
 
   const percent = Math.round(((currentPage + 1) / totalPages) * 100);
@@ -41,8 +41,16 @@ export function ProjectPager({ currentPage, totalPages, onPageChange }: Props) {
 
       <div
         ref={scrubberRef}
-        onMouseDown={handleMouseDown}
-        className="relative h-6 flex items-center cursor-pointer group/scrub"
+        role="slider"
+        tabIndex={0}
+        aria-label="Página de projetos"
+        aria-valuemin={1}
+        aria-valuemax={totalPages}
+        aria-valuenow={currentPage + 1}
+        aria-valuetext={`Página ${currentPage + 1} de ${totalPages}`}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        className="relative h-6 flex items-center cursor-pointer touch-pan-y outline-none focus-visible:ring-1 focus-visible:ring-hot-signal/60 group/scrub"
       >
         <div className="relative w-full h-2 flex gap-[2px]">
           {Array.from({ length: totalPages }, (_, i) => (

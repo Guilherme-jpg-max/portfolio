@@ -1,20 +1,10 @@
-import { lazy, Suspense, useSyncExternalStore, type RefObject } from "react";
+import { lazy, Suspense, type RefObject } from "react";
+import { useIsClient } from "@/hooks/useIsClient";
 import { sceneColors } from "./theme";
 
 // three.js e o pós-processamento ficam num chunk separado, baixado só no
 // cliente: no servidor a cena não produz nada útil.
 const CrtCanvas = lazy(() => import("./CrtCanvas").then((m) => ({ default: m.CrtCanvas })));
-
-const noopSubscribe = () => () => {};
-
-/** `false` no servidor e na hidratação, `true` depois que o cliente assume. */
-function useIsClient(): boolean {
-  return useSyncExternalStore(
-    noopSubscribe,
-    () => true,
-    () => false,
-  );
-}
 
 type Props = {
   /** Progresso do scroll (0–1), lido a cada frame pela câmera. */

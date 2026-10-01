@@ -1,7 +1,10 @@
 import { Link, createRootRoute, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { profile } from "@/content/profile";
 import appCss from "../styles.css?url";
+
+const SITE_DESCRIPTION = `Portfólio de ${profile.name}, desenvolvedor full stack com C#, .NET, React e TypeScript.`;
 
 function NotFoundComponent() {
   return (
@@ -24,7 +27,6 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
   const router = useRouter();
   useEffect(() => {
     console.error("[root error boundary]", error);
@@ -66,22 +68,18 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "guilhermecarlos@portfolio:~$" },
-      {
-        name: "description",
-        content:
-          "Portfolio of a full-stack developer. Front-end, back-end. Currently accepting new projects.",
-      },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: profile.fullName },
+      { name: "theme-color", content: "#0F0505" },
       { property: "og:title", content: "guilhermecarlos@portfolio:~$" },
-      {
-        property: "og:description",
-        content: "Front-end, back-end. A terminal-lit portfolio.",
-      },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:locale", content: "pt_BR" },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",
@@ -101,7 +99,7 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
