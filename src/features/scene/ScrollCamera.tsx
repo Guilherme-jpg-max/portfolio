@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, type RefObject } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { SCREEN, getMobileDistance, sampleDesktopPath, sampleMobileLookHeight } from "./cameraPath";
+import type { PointerPosition } from "./useNormalizedMouse";
 
 const PARALLAX = {
   desktop: { x: 0.2, y: 0.15 },
@@ -12,23 +13,23 @@ const PARALLAX = {
 const CAMERA_EASING = 0.07;
 
 type Props = {
-  progress: number;
-  mouseX: number;
-  mouseY: number;
+  progress: RefObject<number>;
+  mouse: RefObject<PointerPosition>;
   isMobile: boolean;
 };
 
 /** Move a câmera pelo caminho de waypoints conforme o scroll, com parallax do mouse. */
-export function ScrollCamera({ progress, mouseX, mouseY, isMobile }: Props) {
+export function ScrollCamera({ progress, mouse, isMobile }: Props) {
   const { camera, size } = useThree();
   const desired = useRef(new THREE.Vector3());
   const target = useRef(new THREE.Vector3());
 
   useFrame(() => {
+    const { x: mouseX, y: mouseY } = mouse.current;
     if (isMobile) {
       const fov = (camera as THREE.PerspectiveCamera).fov ?? 50;
       const distance = getMobileDistance(fov, size.width / size.height);
-      const lookY = sampleMobileLookHeight(progress);
+      const lookY = sampleMobileLookHeight(progress.current);
 
       desired.current.set(
         mouseX * PARALLAX.mobile.x,
@@ -37,7 +38,7 @@ export function ScrollCamera({ progress, mouseX, mouseY, isMobile }: Props) {
       );
       target.current.set(0, lookY, SCREEN.z);
     } else {
-      const { pos, look } = sampleDesktopPath(progress);
+      const { pos, look } = sampleDesktopPath(progress.current);
 
       desired.current.set(
         pos[0] + mouseX * PARALLAX.desktop.x,

@@ -15,6 +15,11 @@ export default defineConfig({
     tsconfigPaths: true,
     dedupe: ["react", "react-dom", "react/jsx-runtime"],
   },
+  build: {
+    // O chunk da cena (three.js + pós-processamento) tem ~960 kB e é carregado
+    // sob demanda só no cliente; o restante do app fica bem abaixo disso.
+    chunkSizeWarningLimit: 1000,
+  },
   server: {
     port: 8080,
   },

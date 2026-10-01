@@ -11,7 +11,7 @@ import { HeroSection } from "./sections/HeroSection";
 import { WorkSection } from "./sections/WorkSection";
 
 /** Com movimento reduzido a câmera fica parada neste ponto do caminho. */
-const REDUCED_MOTION_PROGRESS = 0.3;
+const REDUCED_MOTION_PROGRESS = { current: 0.3 };
 
 export function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);

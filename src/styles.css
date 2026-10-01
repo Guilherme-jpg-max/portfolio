@@ -16,7 +16,7 @@
 }
 
 :root {
-  /* Paleta da cena — espelhada em src/features/scene/theme.ts */
+  /* Paleta da cena — espelhada em src/features/scene/theme.ts (WebGL não lê CSS) */
   --void: oklch(0.14 0.03 25); /* #0F0505 */
   --shadow-red: oklch(0.22 0.09 25); /* #2B0A0A */
   --ember: oklch(0.38 0.17 25); /* #7A1414 */

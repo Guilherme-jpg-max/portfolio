@@ -1,101 +1,73 @@
-import { useRef, useMemo, useEffect } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useMemo, useRef, type RefObject } from "react";
+import { useFrame } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
 import { bootScreenLines } from "@/content/boot";
+import type { PointerPosition } from "./useNormalizedMouse";
+import { createScreenTexture, drawScreen } from "./screenTexture";
+import { sceneColors } from "./theme";
 
-export function RetroPC({
-  mouseX = 0,
-  mouseY = 0,
-  scrollProgress = 0,
-}: {
-  mouseX?: number;
-  mouseY?: number;
-  scrollProgress?: number;
-}) {
+type Props = {
+  mouse: RefObject<PointerPosition>;
+  scrollProgress: RefObject<number>;
+};
+
+/** Monitor CRT com gabinete, teclado e canecas; reage ao mouse e ao scroll. */
+export function RetroPC({ mouse, scrollProgress }: Props) {
   const rigRef = useRef<THREE.Group>(null);
   const fanRef = useRef<THREE.Mesh>(null);
   const ledRef = useRef<THREE.MeshStandardMaterial>(null);
   const screenMatRef = useRef<THREE.MeshStandardMaterial>(null);
   const lightRef = useRef<THREE.PointLight>(null);
 
-  const { texture, ctx, canvas } = useMemo(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 512;
-    canvas.height = 384;
-    const ctx = canvas.getContext("2d")!;
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.minFilter = THREE.LinearFilter;
-    texture.magFilter = THREE.LinearFilter;
-    texture.colorSpace = THREE.SRGBColorSpace;
-    return { texture, ctx, canvas };
-  }, []);
+  const { texture, ctx } = useMemo(createScreenTexture, []);
+  /** Estado do cursor no último desenho; `null` força redesenhar no próximo frame. */
+  const drawnCursor = useRef<boolean | null>(null);
+
+  useEffect(() => {
+    // A fonte web pode carregar depois do primeiro desenho.
+    document.fonts?.ready.then(() => {
+      drawnCursor.current = null;
+    });
+    return () => texture.dispose();
+  }, [texture]);
 
   const tick = useRef(0);
   useFrame((_, delta) => {
     tick.current += delta;
-    const showCursor = Math.floor(tick.current * 2) % 2 === 0;
+    const time = tick.current;
 
-    ctx.fillStyle = "#1a0303";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "rgba(0,0,0,0.28)";
-    for (let y = 0; y < canvas.height; y += 3) {
-      ctx.fillRect(0, y, canvas.width, 1);
+    const showCursor = Math.floor(time * 2) % 2 === 0;
+    if (showCursor !== drawnCursor.current) {
+      drawScreen(ctx, bootScreenLines, showCursor);
+      texture.needsUpdate = true;
+      drawnCursor.current = showCursor;
     }
 
-    ctx.font = "600 16px 'JetBrains Mono', ui-monospace, monospace";
-    ctx.textBaseline = "top";
-    const pad = 20;
-    bootScreenLines.forEach((line, i) => {
-      const isPrompt = line.startsWith("root@dev");
-      ctx.fillStyle = isPrompt ? "#FF6B4A" : "#F2E8DC";
-      const text = line.replace(/_$/, showCursor ? "▊" : " ");
-      ctx.fillText(text, pad, pad + i * 22);
-    });
-
-    const grad = ctx.createRadialGradient(
-      canvas.width / 2,
-      canvas.height / 2,
-      40,
-      canvas.width / 2,
-      canvas.height / 2,
-      canvas.width * 0.7,
-    );
-    grad.addColorStop(0, "rgba(0,0,0,0)");
-    grad.addColorStop(1, "rgba(30,3,3,0.75)");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    texture.needsUpdate = true;
-
-    if (rigRef.current) {
-      const targetY = mouseX * 0.5;
-      const targetX = -mouseY * 0.25;
-      rigRef.current.rotation.y += (targetY - rigRef.current.rotation.y) * 0.06;
-      rigRef.current.rotation.x += (targetX - rigRef.current.rotation.x) * 0.06;
-      rigRef.current.position.y = Math.sin(tick.current * 1.1) * 0.05;
-      rigRef.current.rotation.z = Math.sin(scrollProgress * Math.PI) * 0.03;
+    const rig = rigRef.current;
+    if (rig) {
+      const { x, y } = mouse.current;
+      rig.rotation.y += (x * 0.5 - rig.rotation.y) * 0.06;
+      rig.rotation.x += (-y * 0.25 - rig.rotation.x) * 0.06;
+      rig.position.y = Math.sin(time * 1.1) * 0.05;
+      rig.rotation.z = Math.sin(scrollProgress.current * Math.PI) * 0.03;
     }
 
     if (fanRef.current) {
       fanRef.current.rotation.z += delta * 6;
     }
     if (ledRef.current) {
-      const b = Math.floor(tick.current * 1.4) % 2 === 0 ? 3 : 0.3;
-      ledRef.current.emissiveIntensity = b;
+      ledRef.current.emissiveIntensity = Math.floor(time * 1.4) % 2 === 0 ? 3 : 0.3;
     }
     if (screenMatRef.current) {
-      const f = 0.9 + Math.sin(tick.current * 9.1) * 0.05 + Math.sin(tick.current * 21) * 0.03;
-      screenMatRef.current.emissiveIntensity = 1.4 * f;
+      const flicker = 0.9 + Math.sin(time * 9.1) * 0.05 + Math.sin(time * 21) * 0.03;
+      screenMatRef.current.emissiveIntensity = 1.4 * flicker;
     }
     if (lightRef.current) {
-      const f = 0.9 + Math.sin(tick.current * 8.7) * 0.06 + Math.sin(tick.current * 19) * 0.03;
-      lightRef.current.intensity = 4.5 * f;
+      const flicker = 0.9 + Math.sin(time * 8.7) * 0.06 + Math.sin(time * 19) * 0.03;
+      lightRef.current.intensity = 4.5 * flicker;
     }
   });
-
-  useEffect(() => () => texture.dispose(), [texture]);
 
   return (
     <group ref={rigRef} position={[0, 0, 0]}>
@@ -118,7 +90,7 @@ export function RetroPC({
             ref={screenMatRef}
             map={texture}
             emissiveMap={texture}
-            emissive={"#C41E1E"}
+            emissive={sceneColors.signal}
             emissiveIntensity={1.4}
             toneMapped={false}
           />
@@ -126,7 +98,7 @@ export function RetroPC({
         <pointLight
           ref={lightRef}
           position={[0, 0, 1.6]}
-          color="#C41E1E"
+          color={sceneColors.signal}
           intensity={4.5}
           distance={9}
           decay={1.5}
@@ -135,8 +107,8 @@ export function RetroPC({
           <sphereGeometry args={[0.025, 8, 8]} />
           <meshStandardMaterial
             ref={ledRef}
-            color="#FF6B4A"
-            emissive="#FF6B4A"
+            color={sceneColors.hotSignal}
+            emissive={sceneColors.hotSignal}
             emissiveIntensity={3}
             toneMapped={false}
           />
@@ -181,8 +153,8 @@ export function RetroPC({
         <mesh position={[0.36, -0.45, 0]} rotation={[0, Math.PI / 2, 0]}>
           <circleGeometry args={[0.015, 8]} />
           <meshStandardMaterial
-            color="#FF6B4A"
-            emissive="#FF6B4A"
+            color={sceneColors.hotSignal}
+            emissive={sceneColors.hotSignal}
             emissiveIntensity={2.5}
             toneMapped={false}
           />

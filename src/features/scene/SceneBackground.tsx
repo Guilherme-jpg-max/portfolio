@@ -1,10 +1,40 @@
-import { CrtCanvas } from "./CrtCanvas";
+import { lazy, Suspense, useSyncExternalStore, type RefObject } from "react";
+import { sceneColors } from "./theme";
+
+// three.js e o pós-processamento ficam num chunk separado, baixado só no
+// cliente: no servidor a cena não produz nada útil.
+const CrtCanvas = lazy(() => import("./CrtCanvas").then((m) => ({ default: m.CrtCanvas })));
+
+const noopSubscribe = () => () => {};
+
+/** `false` no servidor e na hidratação, `true` depois que o cliente assume. */
+function useIsClient(): boolean {
+  return useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
+  );
+}
+
+type Props = {
+  /** Progresso do scroll (0–1), lido a cada frame pela câmera. */
+  progress: RefObject<number>;
+};
 
 /** Cena 3D fixa atrás da página, com scanlines, vinheta e brilho vermelho por cima. */
-export function SceneBackground({ progress }: { progress: number }) {
+export function SceneBackground({ progress }: Props) {
+  const isClient = useIsClient();
+  const placeholder = <div className="h-full w-full" style={{ background: sceneColors.void }} />;
+
   return (
     <div className="fixed inset-0 z-0">
-      <CrtCanvas progress={progress} />
+      {isClient ? (
+        <Suspense fallback={placeholder}>
+          <CrtCanvas progress={progress} />
+        </Suspense>
+      ) : (
+        placeholder
+      )}
       <div className="pointer-events-none absolute inset-0 crt-scanlines crt-vignette" />
       <div
         className="pointer-events-none absolute inset-0 opacity-60 mix-blend-screen"
