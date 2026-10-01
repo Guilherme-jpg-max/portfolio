@@ -13,7 +13,7 @@ export default defineConfig({
   ],
   resolve: {
     tsconfigPaths: true,
-    dedupe: ["react", "react-dom", "react/jsx-runtime", "@tanstack/react-query"],
+    dedupe: ["react", "react-dom", "react/jsx-runtime"],
   },
   server: {
     port: 8080,

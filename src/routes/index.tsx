@@ -142,8 +142,6 @@ function Portfolio() {
   const [progress, setProgress] = useState(0);
   const [bootDone, setBootDone] = useState(false);
   const [reduced, setReduced] = useState(false);
-  const [navOpen, setNavOpen] = useState(false);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(0);

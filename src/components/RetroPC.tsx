@@ -67,9 +67,8 @@ export function RetroPC({
     ctx.textBaseline = "top";
     const pad = 20;
     linesRef.current.forEach((line, i) => {
-      const isHeader = line.startsWith("> ALEX");
       const isPrompt = line.startsWith("root@dev");
-      ctx.fillStyle = isHeader ? "#FF6B4A" : isPrompt ? "#FF6B4A" : "#F2E8DC";
+      ctx.fillStyle = isPrompt ? "#FF6B4A" : "#F2E8DC";
       const text = line.replace(/_$/, showCursor ? "▊" : " ");
       ctx.fillText(text, pad, pad + i * 22);
     });
