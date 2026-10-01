@@ -10,9 +10,17 @@ export type SmartLinkProps = AnchorProps &
  * Renderiza um `Link` do router para rotas internas (`to`) ou uma âncora
  * externa que abre em nova aba (`href`).
  */
-export function SmartLink({ to, href, ...props }: SmartLinkProps) {
+export function SmartLink({ to, href, children, ...props }: SmartLinkProps) {
   if (to !== undefined) {
-    return <Link to={to} {...props} />;
+    return (
+      <Link to={to} {...props}>
+        {children}
+      </Link>
+    );
   }
-  return <a href={href} target="_blank" rel="noopener noreferrer" {...props} />;
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+      {children}
+    </a>
+  );
 }
