@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CrtCanvas } from "@/components/CrtCanvas";
 import { LogTicker } from "@/components/LogTicker";
-import { Github, Lock, Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { Github, Lock, MessageCircle, Linkedin, FileText } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -84,6 +84,38 @@ const PROJECTS = [
   },
 ];
 
+const CHANNELS = [
+  {
+    id: "01",
+    label: "whatsapp",
+    detail: "resposta mais rápida",
+    href: "https://wa.me/5588921715211?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20falar%20sobre%20uma%20oportunidade!",
+    icon: MessageCircle,
+  },
+  {
+    id: "03",
+    label: "linkedin",
+    detail: "trajetória e recomendações",
+    href: "https://www.linkedin.com/in/guilhermecarlos03/",
+    icon: Linkedin,
+  },
+  {
+    id: "04",
+    label: "github",
+    detail: "código-fonte dos projetos",
+    href: "https://github.com/Guilherme-jpg-max",
+    icon: Github,
+  },
+  {
+    id: "05",
+    label: "currículo",
+    detail: "PDF completo",
+    href: "/curriculo",
+    icon: FileText,
+    internal: true,
+  },
+];
+
 const SKILL_GROUPS = [
   {
     label: "linguagens",
@@ -91,11 +123,11 @@ const SKILL_GROUPS = [
   },
   {
     label: "frameworks",
-    items: [".NET", "ASP NET CORE", "react"],
+    items: [".NET", "ASP NET CORE", "entity framework", "react", "tailwindcss"],
   },
   {
     label: "dados/infra",
-    items: ["SQL","postgres", "docker", "websockets"],
+    items: ["postgresql", "mysql", "sqlite", "dapper", "REST APIs"],
   },
 ];
 
@@ -107,7 +139,6 @@ function Portfolio() {
   const [navOpen, setNavOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  // ── paginação dos projetos ──
   const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(0);
   const scrubberRef = useRef<HTMLDivElement>(null);
@@ -254,9 +285,9 @@ function Portfolio() {
                   ~/about.md · foco atual
                 </p>
                 <p className="font-serif text-lg leading-relaxed text-warm-paper/90">
-                  Atuo com desenvolvimento de software, com foco em C# e no ecossistema .NET,
-                  e venho ampliando essa base contribuindo também com o desenvolvimento web
-                  em React e TypeScript, sempre aplicando boas práticas de arquitetura e código.
+                  Sou desenvolvedor Full Stack Jr, estudante do 7º semestre de Sistemas de Informação
+                  no IFCE. Atuei como estagiário na Box3 Software, trabalhando com C# e .NET no
+                  back-end e React/TypeScript no front-end.
                 </p>
               </div>
 
@@ -268,9 +299,10 @@ function Portfolio() {
                   ~/experience.log · trajetória
                 </p>
                 <p className="font-serif text-lg leading-relaxed text-warm-paper/90">
-                  Construí projetos práticos como um sistema de gestão para uma lanchonete
-                  e uma plataforma de aluguel de bicicletas — experiências que solidificaram
-                  minhas habilidades em lógica, modelagem de dados e entrega de software.
+                  No meu estágio anterior desenvolvi um módulo de georreferenciamento fabril com lógica de
+                  coordenadas cartesianas e a funcionalidade completa de rateio de pagamentos
+                  recorrentes, do back-end ao front-end. Também refatorei código legado de jQuery
+                  para React/TypeScript.
                 </p>
               </div>
 
@@ -418,140 +450,57 @@ function Portfolio() {
         </section>
 
         <section id="contact" className="min-h-screen flex items-center px-6 py-24">
-          <div className="mx-auto max-w-2xl w-full">
+          <div className="mx-auto max-w-3xl w-full">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-signal mb-4 text-center">
               // 04_contact.sh
             </p>
-            <h2 className="font-mono text-3xl md:text-5xl uppercase tracking-wider text-warm-paper text-signal-glow text-center mb-10">
+            <h2 className="font-mono text-3xl md:text-5xl uppercase tracking-wider text-warm-paper text-signal-glow text-center mb-4">
               open a<br />
               channel.
             </h2>
-            <form
-              className="panel-ember crt-flicker p-6 md:p-10 rounded-md font-mono text-sm"
-              onSubmit={async (e) => {
-                e.preventDefault();
-                const form = e.currentTarget as HTMLFormElement;
-                const formData = new FormData(form);
-                const name = formData.get("name") as string;
-                const email = formData.get("email") as string;
-                const message = formData.get("message") as string;
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-warm-paper/40 text-center mb-10">
+              ls ~/channels · escolha por onde falar comigo
+            </p>
 
-                setStatus("sending");
+            <div className="grid sm:grid-cols-2 gap-3">
+              {CHANNELS.map((c, i) => {
+                const Icon = c.icon;
+                const linkProps = c.internal
+                  ? { to: c.href }
+                  : { href: c.href, target: "_blank", rel: "noopener noreferrer" };
+                const Wrapper: any = c.internal ? Link : "a";
 
-                try {
-                  const res = await fetch("/api/contact", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, message }),
-                  });
-
-                  if (!res.ok) throw new Error("Falha no envio");
-
-                  form.reset();
-                  setStatus("sent");
-                } catch {
-                  setStatus("error");
-                }
-              }}
-            >
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-ember/60">
-                <span className="w-2 h-2 rounded-full bg-hot-signal shadow-[0_0_8px_#FF6B4A]" />
-                <span className="text-[10px] uppercase tracking-[0.3em] text-warm-paper/50">
-                  session · encrypted
-                </span>
-              </div>
-
-              <label className="block mb-4">
-                <span className="text-hot-signal">root@dev:~$</span>{" "}
-                <span className="text-warm-paper/60">--name</span>
-                <input
-                  required
-                  name="name"
-                  type="text"
-                  className="mt-1 w-full bg-transparent border-b border-ember focus:border-signal outline-none py-2 text-warm-paper placeholder:text-warm-paper/30"
-                  placeholder="your name"
-                />
-              </label>
-
-              <label className="block mb-4">
-                <span className="text-hot-signal">root@dev:~$</span>{" "}
-                <span className="text-warm-paper/60">--reply-to</span>
-                <input
-                  required
-                  name="email"
-                  type="email"
-                  className="mt-1 w-full bg-transparent border-b border-ember focus:border-signal outline-none py-2 text-warm-paper placeholder:text-warm-paper/30"
-                  placeholder="you@domain.tld"
-                />
-              </label>
-
-              <label className="block mb-6">
-                <span className="text-hot-signal">root@dev:~$</span>{" "}
-                <span className="text-warm-paper/60">--message</span>
-                <textarea
-                  required
-                  name="message"
-                  rows={4}
-                  className="mt-1 w-full bg-transparent border border-ember focus:border-signal outline-none p-3 text-warm-paper placeholder:text-warm-paper/30 resize-none"
-                  placeholder="what are you building?"
-                />
-              </label>
-
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="w-full border border-signal bg-signal/10 hover:bg-signal/25 text-warm-paper font-mono uppercase tracking-[0.3em] text-xs py-3 transition-all hover:text-hot-glow disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {status === "sending" ? "$ sending..." : "$ send --now"}
-              </button>
-
-              {status === "sent" && (
-                <div className="mt-4 text-center text-[11px] text-hot-signal">
-                  {"> transmission acknowledged. reply within 48h."}
-                </div>
-              )}
-
-              {status === "error" && (
-                <div className="mt-4 text-center text-[11px] text-red-400">
-                  {"> transmission failed. try whatsapp instead."}
-                </div>
-              )}
-            </form>
-
-            <div className="mt-10 flex justify-center gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/50">
-              <a
-                href="https://wa.me/5588921715211?text=Ol%C3%A1%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20falar%20sobre%20uma%20oportunidade!"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-hot-signal transition-colors"
-              >
-                whatsapp
-              </a>
-              <span className="text-ember">·</span>
-              <a
-                href="https://github.com/Guilherme-jpg-max"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-hot-signal transition-colors"
-              >
-                github
-              </a>
-              <span className="text-ember">·</span>
-              <a
-                href="https://www.linkedin.com/in/guilhermecarlos03/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-hot-signal transition-colors"
-              >
-                linkedin
-              </a>
-              <span className="text-ember">·</span>
-              <Link
-                to="/curriculo"
-                className="hover:text-hot-signal transition-colors"
-              >
-                currículo
-              </Link>
+                return (
+                  <Wrapper
+                    key={c.id}
+                    {...linkProps}
+                    className="panel-ember p-5 rounded-md group relative overflow-hidden fade-up flex items-center gap-4"
+                    style={{ animationDelay: `${i * 80}ms` }}
+                  >
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                      style={{
+                        background:
+                          "radial-gradient(ellipse at top, rgba(255,107,74,0.12), transparent 70%)",
+                      }}
+                    />
+                    <div className="relative flex items-center justify-center w-10 h-10 rounded-md border border-ember text-warm-paper/70 group-hover:text-hot-signal group-hover:border-signal transition-colors shrink-0">
+                      <Icon size={18} />
+                    </div>
+                    <div className="relative min-w-0">
+                      <p className="font-mono text-sm uppercase tracking-[0.2em] text-warm-paper group-hover:text-hot-signal transition-colors">
+                        {c.label}
+                      </p>
+                      <p className="font-mono text-[11px] text-warm-paper/50 truncate">
+                        {c.detail}
+                      </p>
+                    </div>
+                    <span className="relative ml-auto font-mono text-warm-paper/30 group-hover:text-hot-signal transition-colors">
+                      →
+                    </span>
+                  </Wrapper>
+                );
+              })}
             </div>
           </div>
         </section>

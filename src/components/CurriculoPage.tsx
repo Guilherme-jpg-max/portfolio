@@ -3,8 +3,8 @@ import { Link } from "@tanstack/react-router";
 const STACK = {
   "back-end": ["C#", ".NET (Core/Framework)", "Entity Framework", "REST APIs", "Dapper"],
   "front-end": ["React.js", "TypeScript", "JavaScript (ES6+)", "TailwindCSS"],
-  "banco de dados": ["PostgreSQL", "MySQL", "SQLite", "Query optimization"],
-  ferramentas: ["Git/GitHub", "Versionamento de código"],
+  "banco de dados": ["PostgreSQL", "MySQL", "SQLite", "Otimização de queries"],
+  ferramentas: ["Git/GitHub", "Versionamento de código", "Axios", "TailwindCSS"],
 };
 
 const EXPERIENCIAS = [
@@ -15,11 +15,11 @@ const EXPERIENCIAS = [
     periodo: "out/2025 – jul/2026",
     destaque: true,
     bullets: [
-      "Atuação presencial com clientes: visitação às operações das empresas parceiras, mapeamento de fluxos de trabalho reais e coleta de requisitos com usuários finais.",
-      "Sistema de georreferenciamento fabril: módulo completo para mapeamento de estoque e produção, com lógica de coordenadas cartesianas (X, Y, Z) via PostgreSQL e APIs C#.",
-      "Gestão financeira: implementação completa do rateio de pagamentos recorrentes, do back-end à interface front-end.",
-      "Refatoração de código legado de jQuery para React/TypeScript, elevando a performance de carregamento em 40%.",
-      "Correção de bugs críticos via Backoffice, mantendo 99.5% de estabilidade operacional.",
+      "Atuação presencial com clientes para compreender o uso real do sistema, mapear fluxos de trabalho e coletar requisitos diretos com usuários finais.",
+      "Desenvolvimento do módulo de georreferenciamento fabril, com lógica de coordenadas cartesianas (X, Y, Z) e integração com PostgreSQL e APIs em C#.",
+      "Implementação completa da funcionalidade de rateio de pagamentos recorrentes, do back-end à interface front-end.",
+      "Refatoração de código legado em jQuery para React/TypeScript, elevando a performance de carregamento em 40%.",
+      "Participação ativa na correção de bugs críticos via Backoffice, garantindo 99,5% de estabilidade operacional.",
     ],
   },
   {
@@ -29,7 +29,7 @@ const EXPERIENCIAS = [
     periodo: "ago/2025 – set/2025",
     destaque: false,
     bullets: [
-      "Ensino de lógica de programação e Python para múltiplas faixas etárias.",
+      "Ensino de lógica de programação e Python para diferentes faixas etárias, com foco em didática e comunicação técnica simplificada.",
     ],
   },
   {
@@ -39,8 +39,8 @@ const EXPERIENCIAS = [
     periodo: "mar/2023 – nov/2024",
     destaque: false,
     bullets: [
-      "Resolução de conflitos, comunicação interpessoal e gestão de relacionamento com cliente.",
-      "Gestão de fluxo de caixa e conciliações bancárias diárias.",
+      "Desenvolvimento de soft skills em resolução de conflitos, comunicação interpessoal e relacionamento com cliente.",
+      "Responsabilidade pela gestão de fluxo de caixa e conciliações bancárias diárias.",
     ],
   },
 ];
@@ -51,9 +51,9 @@ const PROJETOS = [
     tag: "Interno · Box3",
     stack: "C#, .NET, SQLite, React, TypeScript",
     bullets: [
-      "Solução completa (API + Client) para gerenciamento de notificações de atualização de software.",
-      "API robusta em C# para controle de versões e disparo inteligente de alertas com logging.",
-      "Interface para visualização de histórico de releases e status.",
+      "Desenvolvimento de solução completa (API + Client) para gerenciamento de notificações de atualização de software.",
+      "Back-end robusto em C# para controle de versões e disparo inteligente de alertas com logging.",
+      "Interface responsiva para visualização de histórico de releases e status.",
     ],
   },
   {
@@ -61,25 +61,30 @@ const PROJETOS = [
     tag: null,
     stack: "React, Axios, TailwindCSS",
     bullets: [
-      "Aplicação para demonstrar chamadas assíncronas e tratamento robusto de erros.",
-      "Layout responsivo e componentização eficiente para reutilização de código.",
+      "Aplicação desenvolvida para demonstrar proficiência em chamadas assíncronas, tratamento robusto de erros e consumo de dados externos.",
+      "Implementação de layout responsivo e componentização eficiente para reutilização de código.",
     ],
   },
   {
-    nome: "App de Leitura de Códigos de Barras",
+    nome: "App de Leitura de Códigos de Barras de Pallets/Caixas",
     tag: null,
     stack: "React, TailwindCSS, Axios, Responsive Design",
     bullets: [
-      "Aplicação web para leitura de códigos de barras e tags RFID de pallets/caixas.",
-      "Compatível com smartphones Android, smartwatches e scanners portáteis.",
+      "Aplicação web para leitura e processamento de códigos de barras e tags RFID de pallets/caixas.",
+      "Compatibilidade com múltiplos dispositivos, como smartphones Android, smartwatches e scanners portáteis.",
+      "Interface otimizada com TailwindCSS e integração de APIs via Axios para sincronização de dados em tempo real.",
     ],
   },
 ];
 
+const CURRICULO_PDF_URL = "/Curriculo_Guilherme%20Carlos.pdf";
+// Atualize este nome sempre que trocar o arquivo do currículo.
+
 export function CurriculoPage() {
   return (
-    <main className="min-h-screen bg-black text-warm-paper/80 font-mono px-6 py-16 sm:px-12">
-      <div className="mx-auto max-w-3xl">
+    <main className="relative min-h-screen overflow-hidden bg-void px-6 py-16 text-warm-paper/80 font-mono sm:px-12">
+      <div className="pointer-events-none absolute inset-0 crt-scanlines crt-vignette" />
+      <div className="relative z-10 mx-auto max-w-3xl rounded-md border border-ember/30 bg-void/80 p-6 backdrop-blur-sm sm:p-10">
         <div className="mb-12">
           <Link
             to="/"
@@ -92,27 +97,24 @@ export function CurriculoPage() {
             Guilherme Carlos Sousa da Silva
           </h1>
           <p className="mt-1 text-sm text-warm-paper/60">
-            Desenvolvedor Full Stack · C# · .NET · React
+            Desenvolvedor Full Stack Jr · C# · .NET · React · TypeScript · MySQL · PostgreSQL
+          </p>
+          <p className="mt-2 text-[12px] text-warm-paper/50">
+            (88) 92171-5211 · guilhermecarlostrabalho@gmail.com · Crato, Ceará, Brasil
           </p>
 
           <a
-            href="/curriculo.pdf"
-            download
+            href={CURRICULO_PDF_URL}
+            download="curriculo-guilherme.pdf"
             className="mt-6 inline-block border border-ember/50 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-warm-paper/70 hover:border-hot-signal hover:text-hot-signal transition-colors"
           >
-            [ baixar pdf ]
+            [ baixar pdf completo ]
           </a>
         </div>
 
         <Section title="resumo">
           <p className="text-sm leading-relaxed text-warm-paper/70">
-            Desenvolvedor Full Stack com formação em andamento em Sistemas de
-            Informação (7º semestre, IFCE). Experiência prática no
-            desenvolvimento de aplicações web escaláveis, atuando
-            principalmente com C#, .NET e React/TypeScript, com foco em
-            resolver problemas de negócio através de código bem estruturado.
-            Busco efetivação ou novas oportunidades para aplicar expertise no
-            desenvolvimento de software.
+            Estudante do 7º semestre de Sistemas de Informação no IFCE, com propósito de construir soluções de software que resolvam problemas reais de negócio. Atuei recentemente como Desenvolvedor Full Stack na Box3 Software, trabalhando com C#, .NET e React/TypeScript no desenvolvimento de sistemas desde o levantamento de requisitos com usuários finais até a entrega de funcionalidades do back-end ao front-end. Antes disso, atuei como Tutor de Programação na Kodland Brasil, ensinando lógica de programação e Python. Tenho também uma trajetória anterior em atendimento ao cliente e gestão administrativa, que me deu uma base sólida em comunicação, resolução de conflitos e organização. Busco novas oportunidades para continuar crescendo como desenvolvedor full stack em times que valorizem código bem estruturado, aprendizado constante e colaboração.
           </p>
         </Section>
 
@@ -205,9 +207,9 @@ export function CurriculoPage() {
           <p className="text-[13px] leading-relaxed text-warm-paper/60 mt-2 flex gap-2">
             <span className="text-ember">›</span>
             <span>
-              TCC: Sistema de Georreferenciamento para Monitoramento de
-              Anomalias e Gestão de Zonas de Manejo na Irrigação por
-              Gotejamento da Bananicultura.
+              Atividade recente: desenvolvimento de TCC focado em Sistema de
+              Georreferenciamento para Monitoramento de Anomalias e Gestão de
+              Zonas de Manejo na Irrigação por Gotejamento da Bananicultura.
             </span>
           </p>
         </Section>
@@ -215,17 +217,17 @@ export function CurriculoPage() {
         <div className="grid gap-8 sm:grid-cols-2">
           <Section title="competências">
             <ul className="space-y-2 text-[13px] leading-relaxed text-warm-paper/60">
-              <li><span className="text-ember">›</span> Comunicação técnica clara e objetiva.</li>
-              <li><span className="text-ember">›</span> Aprendizado rápido e autônomo de novas stacks.</li>
-              <li><span className="text-ember">›</span> Proatividade em refatorar e otimizar código.</li>
-              <li><span className="text-ember">›</span> Colaboração em times multifuncionais remotos.</li>
+              <li><span className="text-ember">›</span> Comunicação clara e objetiva, com facilidade para transmitir conceitos técnicos.</li>
+              <li><span className="text-ember">›</span> Rapidez e autonomia para aprender novas tecnologias e metodologias.</li>
+              <li><span className="text-ember">›</span> Proatividade para identificar melhorias, refatorar código legado e propor soluções otimizadas.</li>
+              <li><span className="text-ember">›</span> Colaboração em equipes multifuncionais e ambientes remotos.</li>
             </ul>
           </Section>
 
           <Section title="idiomas">
             <ul className="space-y-2 text-[13px] leading-relaxed text-warm-paper/60">
               <li>Português — nativo</li>
-              <li>Inglês — intermediário (boa leitura técnica)</li>
+              <li>Inglês — intermediário (boa leitura técnica e escrita de documentações)</li>
             </ul>
           </Section>
         </div>
