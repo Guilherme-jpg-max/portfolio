@@ -25,7 +25,7 @@ export function lerp(from: number, to: number, t: number): number {
   return (1 - t) * from + t * to;
 }
 
-export function lerpVec3(from: Vec3, to: Vec3, t: number): Vec3 {
+function lerpVec3(from: Vec3, to: Vec3, t: number): Vec3 {
   return [lerp(from[0], to[0], t), lerp(from[1], to[1], t), lerp(from[2], to[2], t)];
 }
 

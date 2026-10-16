@@ -1,7 +1,7 @@
 import { useCallback, useSyncExternalStore } from "react";
 
 /** Mesmo breakpoint usado pelo Tailwind (`md`) para alternar o layout mobile. */
-export const MOBILE_QUERY = "(max-width: 768px)";
+const MOBILE_QUERY = "(max-width: 768px)";
 
 /**
  * Assina uma media query. No servidor (e na hidratação) retorna `false`, e o

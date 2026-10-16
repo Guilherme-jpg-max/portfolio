@@ -8,14 +8,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: [
-      "dist",
-      ".output",
-      ".vinxi",
-      ".wrangler",
-      "worker-configuration.d.ts",
-      "src/routeTree.gen.ts",
-    ],
+    ignores: ["dist", ".wrangler", "worker-configuration.d.ts", "src/routeTree.gen.ts"],
   },
   {
     extends: [
