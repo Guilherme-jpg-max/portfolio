@@ -75,10 +75,10 @@ export function ProjectPager({ currentPage, totalPages, onPageChange }: Props) {
 
       <div className="flex items-center justify-between mt-2">
         <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-warm-paper/40">
-          [h] prev · [l] next · click to jump
+          [h] anterior · [l] próxima · clique para pular
         </span>
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-hot-signal">
-          {currentPage + 1}/{totalPages} pages · {percent}%
+          {currentPage + 1}/{totalPages} páginas · {percent}%
         </span>
       </div>
     </div>

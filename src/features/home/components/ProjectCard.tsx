@@ -32,11 +32,11 @@ export function ProjectCard({ project, style }: Props) {
       <div className="relative mt-4 pt-3 border-t border-ember/40 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/50 group-hover:text-hot-signal transition-colors">
         {project.github ? (
           <>
-            <FooterLabel icon={<Github size={12} />}>view source</FooterLabel>
+            <FooterLabel icon={<Github size={12} />}>ver código</FooterLabel>
             <span>→</span>
           </>
         ) : (
-          <FooterLabel icon={<Lock size={12} />}>private repository</FooterLabel>
+          <FooterLabel icon={<Lock size={12} />}>repositório privado</FooterLabel>
         )}
       </div>
     </>

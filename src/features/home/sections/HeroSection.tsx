@@ -18,7 +18,7 @@ export function HeroSection({ showScrollHint }: Props) {
           showScrollHint ? "opacity-100" : "opacity-0",
         )}
       >
-        ↓ scroll to pull the camera back ↓
+        ↓ role para afastar a câmera ↓
       </div>
     </section>
   );

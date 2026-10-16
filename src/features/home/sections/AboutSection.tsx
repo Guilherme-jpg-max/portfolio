@@ -9,7 +9,7 @@ export function AboutSection() {
     <section id="about" className="min-h-screen flex items-center px-6 py-24">
       <div className="mx-auto max-w-6xl w-full grid md:grid-cols-12 gap-8">
         <div className="md:col-span-5">
-          <SectionHeading label="// 02_sobre.md">
+          <SectionHeading label="// 02_about.md">
             notas
             <br />
             sobre meu

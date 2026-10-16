@@ -31,7 +31,7 @@ export function WorkSection() {
       <div className="mx-auto max-w-6xl w-full">
         <div className="mb-8 flex items-end justify-between">
           <span className="hidden md:block font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/40">
-            {projects.length} files · sorted by recency
+            {projects.length} projetos · mais recentes primeiro
           </span>
         </div>
 

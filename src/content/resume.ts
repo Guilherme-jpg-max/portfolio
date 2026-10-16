@@ -5,9 +5,9 @@ export const summary =
 
 export const stack: Record<string, string[]> = {
   "back-end": ["C#", ".NET (Core/Framework)", "Entity Framework", "REST APIs", "Dapper"],
-  "front-end": ["React.js", "TypeScript", "JavaScript (ES6+)", "TailwindCSS"],
+  "front-end": ["React", "TypeScript", "JavaScript (ES6+)", "Tailwind CSS"],
   "banco de dados": ["PostgreSQL", "MySQL", "SQLite", "Otimização de queries"],
-  ferramentas: ["Git/GitHub", "Versionamento de código", "Axios", "TailwindCSS"],
+  ferramentas: ["Git/GitHub", "Versionamento de código", "Axios"],
 };
 
 export const experiences: Experience[] = [
@@ -62,7 +62,7 @@ export const resumeProjects: ResumeProject[] = [
   {
     name: "Teste Técnico Box3 — Consumo de API",
     tag: null,
-    stack: "React, Axios, TailwindCSS",
+    stack: "React, Axios, Tailwind CSS",
     bullets: [
       "Aplicação desenvolvida para demonstrar proficiência em chamadas assíncronas, tratamento robusto de erros e consumo de dados externos.",
       "Implementação de layout responsivo e componentização eficiente para reutilização de código.",
@@ -71,11 +71,11 @@ export const resumeProjects: ResumeProject[] = [
   {
     name: "App de Leitura de Códigos de Barras de Pallets/Caixas",
     tag: null,
-    stack: "React, TailwindCSS, Axios, Responsive Design",
+    stack: "React, Tailwind CSS, Axios, Responsive Design",
     bullets: [
       "Aplicação web para leitura e processamento de códigos de barras e tags RFID de pallets/caixas.",
       "Compatibilidade com múltiplos dispositivos, como smartphones Android, smartwatches e scanners portáteis.",
-      "Interface otimizada com TailwindCSS e integração de APIs via Axios para sincronização de dados em tempo real.",
+      "Interface otimizada com Tailwind CSS e integração de APIs via Axios para sincronização de dados em tempo real.",
     ],
   },
 ];

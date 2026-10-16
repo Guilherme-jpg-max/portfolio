@@ -4,14 +4,14 @@ import type { SkillGroup } from "./types";
 export const skillGroups: SkillGroup[] = [
   {
     label: "linguagens",
-    items: ["C#", "typescript", "JavaScript", "python"],
+    items: ["C#", "TypeScript", "JavaScript", "Python"],
   },
   {
     label: "frameworks",
-    items: [".NET", "ASP NET CORE", "entity framework", "react", "tailwindcss"],
+    items: [".NET", "ASP.NET Core", "Entity Framework", "React", "Tailwind CSS"],
   },
   {
     label: "dados/infra",
-    items: ["postgresql", "mysql", "sqlite", "dapper", "REST APIs"],
+    items: ["PostgreSQL", "MySQL", "SQLite", "Dapper", "REST APIs"],
   },
 ];
