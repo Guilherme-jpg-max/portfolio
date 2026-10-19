@@ -30,7 +30,7 @@ export function ProjectPager({ currentPage, totalPages, onPageChange }: Props) {
   const percent = Math.round(((currentPage + 1) / totalPages) * 100);
 
   return (
-    <div className="mt-6 select-none">
+    <div className="mt-6 -mx-3 px-3 py-2 rounded-sm bg-void/70 backdrop-blur-sm select-none md:mx-0 md:p-0 md:bg-transparent md:backdrop-blur-none">
       <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/40 mb-2">
         root@dev:~/work$ fetching page {currentPage + 1} of {totalPages}...
       </p>
@@ -46,7 +46,7 @@ export function ProjectPager({ currentPage, totalPages, onPageChange }: Props) {
         aria-valuetext={`Página ${currentPage + 1} de ${totalPages}`}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
-        className="relative h-6 flex items-center cursor-pointer touch-pan-y outline-none focus-visible:ring-1 focus-visible:ring-hot-signal/60 group/scrub"
+        className="relative h-10 md:h-6 flex items-center cursor-pointer touch-pan-y outline-none focus-visible:ring-1 focus-visible:ring-hot-signal/60 group/scrub"
       >
         <div className="relative w-full h-2 flex gap-[2px]">
           {Array.from({ length: totalPages }, (_, i) => (
@@ -69,11 +69,11 @@ export function ProjectPager({ currentPage, totalPages, onPageChange }: Props) {
         />
       </div>
 
-      <div className="flex items-center justify-between mt-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-warm-paper/40">
+      <div className="flex items-center justify-end md:justify-between mt-2">
+        <span className="hidden md:inline font-mono text-[10px] uppercase tracking-[0.25em] text-warm-paper/40">
           [h] anterior · [l] próxima · clique para pular
         </span>
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-hot-signal">
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-hot-signal whitespace-nowrap">
           {currentPage + 1}/{totalPages} páginas · {percent}%
         </span>
       </div>

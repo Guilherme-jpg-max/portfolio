@@ -95,7 +95,7 @@ export function ResumePage() {
           </Section>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-warm-paper/10 flex justify-center gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/50">
+        <div className="mt-16 pt-8 border-t border-warm-paper/10 flex items-center justify-center gap-3 sm:gap-6 font-mono text-[10px] uppercase tracking-[0.3em] text-warm-paper/50">
           {FOOTER_LINKS.map((link, i) => (
             <Fragment key={link.label}>
               {i > 0 && <span className="text-ember">·</span>}
@@ -103,7 +103,7 @@ export function ResumePage() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-hot-signal transition-colors"
+                className="inline-flex items-center min-h-11 px-1 hover:text-hot-signal transition-colors"
               >
                 {link.label}
               </a>
@@ -120,7 +120,7 @@ function ResumeHeader() {
     <div className="mb-12">
       <Link
         to="/"
-        className="text-[10px] uppercase tracking-[0.3em] text-warm-paper/40 hover:text-hot-signal transition-colors"
+        className="inline-flex items-center min-h-11 -my-3 text-[10px] uppercase tracking-[0.3em] text-warm-paper/40 hover:text-hot-signal transition-colors"
       >
         ← voltar
       </Link>
@@ -136,7 +136,7 @@ function ResumeHeader() {
       <a
         href={profile.resumePdf.url}
         download={profile.resumePdf.downloadName}
-        className="mt-6 inline-block border border-ember/50 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-warm-paper/70 hover:border-hot-signal hover:text-hot-signal transition-colors"
+        className="mt-6 inline-flex items-center min-h-11 border border-ember/50 px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-warm-paper/70 hover:border-hot-signal hover:text-hot-signal transition-colors"
       >
         [ baixar pdf completo ]
       </a>
