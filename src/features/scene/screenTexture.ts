@@ -13,7 +13,6 @@ export type ScreenTexture = {
   ctx: CanvasRenderingContext2D;
 };
 
-/** Cria o canvas 2D usado como textura (e emissão) da tela do monitor. */
 export function createScreenTexture(): ScreenTexture {
   const canvas = document.createElement("canvas");
   canvas.width = WIDTH;
@@ -28,10 +27,6 @@ export function createScreenTexture(): ScreenTexture {
   return { texture, ctx };
 }
 
-/**
- * Desenha o terminal: fundo, scanlines, linhas de texto e vinheta. Linhas que
- * começam com `root@dev` saem na cor de prompt; um `_` final vira o cursor.
- */
 export function drawScreen(
   ctx: CanvasRenderingContext2D,
   lines: readonly string[],

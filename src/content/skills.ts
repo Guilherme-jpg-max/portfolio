@@ -1,6 +1,5 @@
 import type { SkillGroup } from "./types";
 
-/** Resumo de skills exibido na home (o currículo tem a stack detalhada). */
 export const skillGroups: SkillGroup[] = [
   {
     label: "linguagens",

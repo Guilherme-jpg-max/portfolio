@@ -9,7 +9,6 @@ const PARALLAX = {
   mobile: { x: 0.03, y: 0.02 },
 } as const;
 
-/** Suavização aplicada a cada frame ao aproximar a câmera do alvo. */
 const CAMERA_EASING = 0.07;
 
 type Props = {
@@ -18,7 +17,6 @@ type Props = {
   isMobile: boolean;
 };
 
-/** Move a câmera pelo caminho de waypoints conforme o scroll, com parallax do mouse. */
 export function ScrollCamera({ progress, mouse, isMobile }: Props) {
   const { camera, size } = useThree();
   const desired = useRef(new THREE.Vector3());

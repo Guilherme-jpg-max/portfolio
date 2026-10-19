@@ -1,4 +1,3 @@
-/** Brilho radial que aparece no hover de um card com a classe `group`. */
 export function GlowOverlay() {
   return (
     <div

@@ -12,7 +12,6 @@ type Props = {
   scrollProgress: RefObject<number>;
 };
 
-/** Monitor CRT com gabinete, teclado e canecas; reage ao mouse e ao scroll. */
 export function RetroPC({ mouse, scrollProgress }: Props) {
   const rigRef = useRef<THREE.Group>(null);
   const fanRef = useRef<THREE.Mesh>(null);
@@ -21,11 +20,9 @@ export function RetroPC({ mouse, scrollProgress }: Props) {
   const lightRef = useRef<THREE.PointLight>(null);
 
   const { texture, ctx } = useMemo(createScreenTexture, []);
-  /** Estado do cursor no último desenho; `null` força redesenhar no próximo frame. */
   const drawnCursor = useRef<boolean | null>(null);
 
   useEffect(() => {
-    // A fonte web pode carregar depois do primeiro desenho.
     document.fonts?.ready.then(() => {
       drawnCursor.current = null;
     });

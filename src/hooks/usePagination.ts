@@ -14,10 +14,6 @@ export function getTotalPages(itemCount: number, pageSize: number): number {
   return Math.max(1, Math.ceil(itemCount / pageSize));
 }
 
-/**
- * Paginação client-side. A página atual é limitada ao total de páginas, então
- * mudar o `pageSize` (ex.: ao virar mobile) nunca deixa a página fora do range.
- */
 export function usePagination<T>(items: readonly T[], pageSize: number): Pagination<T> {
   const [requestedPage, setRequestedPage] = useState(0);
   const totalPages = getTotalPages(items.length, pageSize);
@@ -41,7 +37,6 @@ export function usePagination<T>(items: readonly T[], pageSize: number): Paginat
   };
 }
 
-/** Converte a posição horizontal (0–1) dentro de uma barra no índice da página. */
 export function pageFromRatio(ratio: number, totalPages: number): number {
   return Math.floor(ratio * totalPages);
 }

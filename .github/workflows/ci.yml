@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
   pull_request:
-  # Disparado pelo workflow de estatísticas depois que ele commita um novo total.
   workflow_dispatch:
 
 concurrency:
@@ -28,7 +27,6 @@ jobs:
         run: npm run check
 
   deploy:
-    # Só publica a partir da main, e só depois de todas as checagens passarem.
     needs: check
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -49,8 +47,6 @@ jobs:
             echo "deploy=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # Se a main já avançou (ex.: o robô commitou um novo total de commits),
-          # o run do commit mais novo publica; este não pode sobrescrevê-lo.
           latest=$(git ls-remote origin refs/heads/main | cut -f1)
           if [ "$latest" != "$GITHUB_SHA" ]; then
             echo "::notice::main avançou para ${latest:0:7}; o deploy fica para o run desse commit."

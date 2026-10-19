@@ -1,11 +1,9 @@
 import { cx } from "@/lib/cx";
 
 type Props = {
-  /** Exibe a dica de rolagem (com fade) quando `true`; fica oculta no SSR. */
   showScrollHint: boolean;
 };
 
-/** Primeira tela: vazia de propósito, para a cena 3D ficar em destaque. */
 export function HeroSection({ showScrollHint }: Props) {
   return (
     <section

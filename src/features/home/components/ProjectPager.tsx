@@ -8,10 +8,6 @@ type Props = {
   onPageChange: (page: number) => void;
 };
 
-/**
- * Barra de progresso no estilo terminal: clique, arraste (mouse ou toque) ou
- * teclado escolhem a página. Exposta como slider para leitores de tela.
- */
 export function ProjectPager({ currentPage, totalPages, onPageChange }: Props) {
   const scrubberRef = useRef<HTMLDivElement>(null);
 

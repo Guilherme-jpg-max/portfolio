@@ -64,7 +64,6 @@ describe("usePagination", () => {
     expect(result.current.currentPage).toBe(1);
     expect(result.current.pageItems).toEqual(["e", "f", "g", "h"]);
 
-    // A navegação continua a partir da página exibida, não da antiga.
     act(() => result.current.prev());
     expect(result.current.currentPage).toBe(0);
   });

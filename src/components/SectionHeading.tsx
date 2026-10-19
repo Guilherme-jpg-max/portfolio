@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { cx } from "@/lib/cx";
 
 type Props = {
-  /** Rótulo em estilo de arquivo exibido acima do título (ex.: `// 02_about.md`). */
   label: string;
   children: ReactNode;
   centered?: boolean;

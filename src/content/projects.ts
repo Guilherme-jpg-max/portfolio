@@ -1,6 +1,5 @@
 import type { Project } from "./types";
 
-/** Projetos exibidos na home, do mais recente para o mais antigo. */
 export const projects: Project[] = [
   {
     id: "01",

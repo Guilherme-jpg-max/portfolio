@@ -2,16 +2,12 @@ import { lazy, Suspense, type RefObject } from "react";
 import { useIsClient } from "@/hooks/useIsClient";
 import { sceneColors } from "./theme";
 
-// three.js e o pós-processamento ficam num chunk separado, baixado só no
-// cliente: no servidor a cena não produz nada útil.
 const CrtCanvas = lazy(() => import("./CrtCanvas").then((m) => ({ default: m.CrtCanvas })));
 
 type Props = {
-  /** Progresso do scroll (0–1), lido a cada frame pela câmera. */
   progress: RefObject<number>;
 };
 
-/** Cena 3D fixa atrás da página, com scanlines, vinheta e brilho vermelho por cima. */
 export function SceneBackground({ progress }: Props) {
   const isClient = useIsClient();
   const placeholder = <div className="h-full w-full" style={{ background: sceneColors.void }} />;

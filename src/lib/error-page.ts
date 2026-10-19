@@ -1,7 +1,3 @@
-/**
- * HTML estático servido quando o SSR falha antes de o React conseguir renderizar.
- * Não depende do CSS do app: as cores replicam a paleta de `src/styles.css`.
- */
 export function renderErrorPage(): string {
   return `<!doctype html>
 <html lang="pt-BR">

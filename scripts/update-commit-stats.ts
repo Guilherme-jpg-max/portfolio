@@ -1,13 +1,3 @@
-/**
- * Atualiza `src/data/commit-stats.json` com o total de contribuições no GitHub
- * desde a criação da conta.
- *
- * O `contributionCalendar` da API só cobre até 1 ano por consulta (sem `from`,
- * os últimos 12 meses), então o total histórico é a soma de cada ano em que
- * houve contribuições.
- *
- * Uso: GH_TOKEN=<token> node scripts/update-commit-stats.ts
- */
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
@@ -16,7 +6,6 @@ const OUTPUT_FILE = new URL("../src/data/commit-stats.json", import.meta.url);
 
 type YearTotal = { contributionCalendar: { totalContributions: number } };
 
-/** Monta uma única consulta com um alias por ano (`y2024`, `y2025`, ...). */
 export function buildYearlyQuery(years: readonly number[], now: Date): string {
   const fields = years.map((year) => {
     const from = `${year}-01-01T00:00:00Z`;
@@ -74,13 +63,10 @@ async function main(): Promise<void> {
   );
 
   const total = sumYearlyTotals(viewer);
-  // Um total zerado indica falha na API, não ausência de commits: não grava.
   if (!Number.isInteger(total) || total <= 0) {
     throw new Error(`Total inválido (${total}); arquivo não atualizado.`);
   }
 
-  // Só regrava quando o total muda: evita um commit (e um deploy) por dia
-  // apenas para atualizar a data.
   const current = await readCurrentTotal();
   if (current === total) {
     console.log(`Total inalterado (${total}); nada a atualizar.`);

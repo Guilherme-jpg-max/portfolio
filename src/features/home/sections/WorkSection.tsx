@@ -14,8 +14,6 @@ export function WorkSection() {
     isMobile ? PAGE_SIZE.mobile : PAGE_SIZE.desktop,
   );
 
-  // Navegação estilo vim: h/← volta, l/→ avança. Atalhos com modificador
-  // (ex.: Ctrl+L) e teclas digitadas em campos de texto ficam com o navegador.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey || event.metaKey || event.altKey || isEditable(event.target)) return;
@@ -35,7 +33,6 @@ export function WorkSection() {
           </span>
         </div>
 
-        {/* A key reinicia a animação de entrada a cada troca de página. */}
         <div key={currentPage} className="grid md:grid-cols-2 gap-3 auto-rows-fr">
           {pageItems.map((project, i) => (
             <ProjectCard

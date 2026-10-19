@@ -4,7 +4,6 @@ on:
   schedule:
     - cron: "0 6 * * *" # todo dia às 06:00 UTC
   workflow_dispatch:
-  # Roda também quando a própria lógica de contagem muda.
   push:
     branches: [main]
     paths:
@@ -44,8 +43,6 @@ jobs:
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
-      # Commits feitos com o GITHUB_TOKEN não disparam outros workflows, então o
-      # CI (que testa e publica o site com o número novo) é chamado explicitamente.
       - name: Disparar CI para publicar o novo total
         if: steps.commit.outputs.changed == 'true'
         env:

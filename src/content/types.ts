@@ -6,7 +6,6 @@ export type Project = {
   stack: string;
   blurb: string;
   status: string;
-  /** URL do repositório; `null` quando o código é privado. */
   github: string | null;
 };
 

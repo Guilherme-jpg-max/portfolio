@@ -6,10 +6,6 @@ type AnchorProps = Omit<ComponentProps<"a">, "href">;
 export type SmartLinkProps = AnchorProps &
   ({ to: LinkProps["to"]; href?: never } | { href: string; to?: never });
 
-/**
- * Renderiza um `Link` do router para rotas internas (`to`) ou uma âncora
- * externa que abre em nova aba (`href`).
- */
 export function SmartLink({ to, href, children, ...props }: SmartLinkProps) {
   if (to !== undefined) {
     return (

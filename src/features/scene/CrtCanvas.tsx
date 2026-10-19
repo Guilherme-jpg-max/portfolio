@@ -7,7 +7,6 @@ import { ScrollCamera } from "./ScrollCamera";
 import { sceneColors } from "./theme";
 import { useNormalizedMouse } from "./useNormalizedMouse";
 
-/** Configuração da cena por tipo de dispositivo: mobile renderiza mais leve. */
 const SCENE_CONFIG = {
   desktop: {
     dpr: [1, 2],
@@ -24,7 +23,6 @@ const SCENE_CONFIG = {
 } as const;
 
 type Props = {
-  /** Progresso do scroll (0–1), lido a cada frame. */
   progress: RefObject<number>;
 };
 

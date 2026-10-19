@@ -1,4 +1,3 @@
-/** Notas da seção "sobre" da home, na ordem em que aparecem. */
 export const aboutNotes = {
   focus: {
     label: "~/about.md · foco atual",

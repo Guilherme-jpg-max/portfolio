@@ -8,7 +8,6 @@ export const profile = {
   phone: "(88) 92171-5211",
   email: "guilhermecarlostrabalho@gmail.com",
   location: "Crato, Ceará, Brasil",
-  /** Ano de início da carreira; o rodapé exibe o "uptime" a partir dele. */
   careerStartYear: 2017,
   links: {
     whatsapp: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_GREETING)}`,
@@ -16,7 +15,6 @@ export const profile = {
     linkedin: "https://www.linkedin.com/in/guilhermecarlos03/",
   },
   resumePdf: {
-    // Atualize este caminho sempre que trocar o arquivo em public/.
     url: "/Curriculo_Guilherme%20Carlos.pdf",
     downloadName: "curriculo-guilherme.pdf",
   },

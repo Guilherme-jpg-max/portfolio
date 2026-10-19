@@ -2,10 +2,6 @@ import { useEffect, useRef, type RefObject } from "react";
 
 export type PointerPosition = { x: number; y: number };
 
-/**
- * Posição do mouse normalizada para -1..1 nos dois eixos. Fica num ref (lido
- * no `useFrame`) para não re-renderizar a árvore 3D a cada movimento.
- */
 export function useNormalizedMouse(): RefObject<PointerPosition> {
   const mouse = useRef<PointerPosition>({ x: 0, y: 0 });
 
