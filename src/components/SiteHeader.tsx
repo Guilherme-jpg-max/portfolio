@@ -1,7 +1,7 @@
 const NAV_ITEMS = [
   { href: "#terminal", label: "01_boot", shortLabel: "boot" },
   { href: "#about", label: "02_about", shortLabel: "about" },
-  { href: "#work", label: "03_work", shortLabel: "work" },
+  { href: "#jornada", label: "03_jornada", shortLabel: "jornada" },
   { href: "#contact", label: "04_contact", shortLabel: "contact" },
 ] as const;
 
