@@ -11,6 +11,7 @@ import {
   summary,
 } from "@/content/resume";
 import type { Experience, ResumeProject } from "@/content/types";
+import { compareNewestFirst, formatResumePeriod } from "@/lib/period";
 
 const FOOTER_LINKS = [
   { label: "whatsapp", href: profile.links.whatsapp },
@@ -51,8 +52,8 @@ export function ResumePage() {
 
         <Section title="experiência">
           <div className="space-y-8">
-            {experiences.map((experience) => (
-              <ExperienceItem key={experience.role + experience.company} experience={experience} />
+            {[...experiences].sort(compareNewestFirst).map((experience) => (
+              <ExperienceItem key={experience.id} experience={experience} />
             ))}
           </div>
         </Section>
@@ -157,7 +158,9 @@ function ExperienceItem({ experience }: { experience: Experience }) {
         <h3 className="text-sm font-semibold text-warm-paper">
           {experience.role} <span className="text-warm-paper/50">· {experience.company}</span>
         </h3>
-        <span className="text-[10px] text-warm-paper/40">{experience.period}</span>
+        <span className="text-[10px] text-warm-paper/40">
+          {formatResumePeriod(experience.start, experience.end)}
+        </span>
       </div>
       {experience.tag && (
         <span className="text-[10px] uppercase tracking-[0.2em] text-hot-signal">

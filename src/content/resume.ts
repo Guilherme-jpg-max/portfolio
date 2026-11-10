@@ -12,11 +12,29 @@ export const stack: Record<string, string[]> = {
 
 export const experiences: Experience[] = [
   {
+    id: "maria-pitanga",
+    role: "Desenvolvedor Freelancer",
+    company: "Maria Pitanga",
+    shortName: "Maria Pitanga",
+    tag: null,
+    start: "2026-06",
+    end: null,
+    highlight: true,
+    summary: "Sistema próprio de fechamento mensal para as 4 unidades da franquia.",
+    bullets: [
+      "Desenvolvimento de sistema web próprio de controle de fechamento mensal (React, TypeScript, Cloudflare Workers e banco D1) para centralizar e padronizar os dados das 4 unidades da franquia.",
+    ],
+  },
+  {
+    id: "box3-software",
     role: "Desenvolvedor Full Stack",
     company: "Box3 Software",
+    shortName: "Box3",
     tag: "Estágio",
-    period: "out/2025 – jul/2026",
+    start: "2025-10",
+    end: "2026-07",
     highlight: true,
+    summary: "Full stack em C#/.NET e React/TypeScript, do requisito com o cliente à entrega.",
     bullets: [
       "Atuação presencial com clientes para compreender o uso real do sistema, mapear fluxos de trabalho e coletar requisitos diretos com usuários finais.",
       "Desenvolvimento do módulo de georreferenciamento fabril, com lógica de coordenadas cartesianas (X, Y, Z) e integração com PostgreSQL e APIs em C#.",
@@ -26,21 +44,30 @@ export const experiences: Experience[] = [
     ],
   },
   {
+    id: "kodland",
     role: "Tutor de Programação",
     company: "Kodland Brasil",
+    shortName: "Kodland",
     tag: null,
-    period: "ago/2025 – set/2025",
+    start: "2025-08",
+    end: "2025-09",
     highlight: false,
+    summary: "Ensinei lógica de programação e Python para turmas de várias idades.",
     bullets: [
       "Ensino de lógica de programação e Python para diferentes faixas etárias, com foco em didática e comunicação técnica simplificada.",
     ],
   },
   {
+    id: "ma-romao",
     role: "Atendente / Administrativo",
-    company: "M A Romão Costa LTDA",
+    company: "M A Romão Costa",
+    shortName: "M A Romão",
     tag: null,
-    period: "mar/2023 – nov/2024",
+    start: "2023-03",
+    end: "2024-11",
     highlight: false,
+    summary:
+      "Fluxo de caixa, conciliações bancárias e atendimento ao cliente — a base de negócio antes do código.",
     bullets: [
       "Desenvolvimento de soft skills em resolução de conflitos, comunicação interpessoal e relacionamento com cliente.",
       "Responsabilidade pela gestão de fluxo de caixa e conciliações bancárias diárias.",
