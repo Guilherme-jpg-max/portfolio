@@ -1,5 +1,8 @@
 import type { LinkProps } from "@tanstack/react-router";
 
+/** Mês no formato `AAAA-MM`, ex.: `"2025-10"`. */
+export type YearMonth = `${number}-${number}`;
+
 export type Project = {
   id: string;
   name: string;
