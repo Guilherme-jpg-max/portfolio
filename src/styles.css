@@ -10,6 +10,18 @@
   --color-signal: var(--signal);
   --color-hot-signal: var(--hot-signal);
   --color-warm-paper: var(--warm-paper);
+  --color-signal-soft: var(--signal-soft);
+  --color-ember-deep: var(--ember-deep);
+  --color-ember-dim: var(--ember-dim);
+  --color-crt-casing-hi: var(--crt-casing-hi);
+  --color-crt-casing: var(--crt-casing);
+  --color-crt-casing-lo: var(--crt-casing-lo);
+  --color-crt-panel: var(--crt-panel);
+  --color-crt-bezel: var(--crt-bezel);
+  --color-crt-screen: var(--crt-screen);
+  --color-crt-slot: var(--crt-slot);
+  --color-crt-seam: var(--crt-seam);
+  --color-crt-shadow: var(--crt-shadow);
 
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-serif: "Fraunces", ui-serif, Georgia, serif;
@@ -22,6 +34,20 @@
   --signal: oklch(0.55 0.24 25);
   --hot-signal: oklch(0.72 0.22 30);
   --warm-paper: oklch(0.93 0.03 75);
+
+  /* Jornada: gabinete do PC e caixa de disquetes */
+  --signal-soft: #ff9a7e;
+  --ember-deep: #5a1410;
+  --ember-dim: #7e1a16;
+  --crt-casing-hi: #36190f;
+  --crt-casing: #24100b;
+  --crt-casing-lo: #170805;
+  --crt-panel: #2a1410;
+  --crt-bezel: #1a0907;
+  --crt-screen: #1a0303;
+  --crt-slot: #160705;
+  --crt-seam: #3d0f0c;
+  --crt-shadow: #0d0303;
 }
 
 @layer base {
@@ -104,10 +130,165 @@
   animation: fade-up 0.6s ease-out both;
 }
 
+/* ---------- Jornada ---------- */
+
+@utility journey-glow {
+  text-shadow:
+    0 0 3px rgba(255, 107, 74, 0.4),
+    0 0 10px rgba(196, 30, 30, 0.2);
+}
+@utility journey-glow-soft {
+  text-shadow: 0 0 2px rgba(242, 232, 220, 0.15);
+}
+
+@keyframes journey-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@utility journey-cursor {
+  display: inline-block;
+  width: 0.7em;
+  height: 1.2em;
+  vertical-align: -0.22em;
+  background: var(--color-hot-signal);
+  box-shadow: 0 0 8px var(--color-hot-signal);
+  animation: journey-blink 1s steps(1) infinite;
+}
+
+@keyframes journey-float {
+  0%,
+  100% {
+    transform: rotateY(11deg) rotateX(4deg) translateY(0);
+  }
+  50% {
+    transform: rotateY(8deg) rotateX(3deg) translateY(-8px);
+  }
+}
+@keyframes journey-float-sm {
+  0%,
+  100% {
+    transform: rotateX(5deg) translateY(0);
+  }
+  50% {
+    transform: rotateX(3deg) translateY(-5px);
+  }
+}
+@utility journey-float {
+  animation: journey-float 7s ease-in-out infinite;
+}
+@utility journey-float-sm {
+  animation: journey-float-sm 7s ease-in-out infinite;
+}
+
+@keyframes journey-halo {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+@utility journey-halo {
+  animation: journey-halo 4s ease-in-out infinite;
+}
+
+@keyframes journey-roll {
+  from {
+    top: -70px;
+  }
+  to {
+    top: 105%;
+  }
+}
+@utility journey-roll {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 107, 74, 0) 0%,
+    rgba(255, 107, 74, 0.06) 50%,
+    rgba(255, 107, 74, 0) 100%
+  );
+  animation: journey-roll 5s linear infinite;
+}
+
+@keyframes journey-led {
+  50% {
+    opacity: 0.2;
+  }
+}
+@utility journey-led-busy {
+  animation: journey-led 0.12s steps(1) infinite;
+}
+
+@keyframes journey-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+@utility journey-ring {
+  animation: journey-ring 1.6s ease-out infinite;
+}
+
+/* Disquete voando da caixa até o drive; --fly-dx/--fly-dy vêm do componente. */
+@keyframes journey-disk-fly {
+  0% {
+    transform: translate(0, 0) rotate(-14deg) scale(1);
+    opacity: 1;
+  }
+  65% {
+    transform: translate(var(--fly-dx), calc(var(--fly-dy) - 38px)) rotate(0deg) scale(0.82);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--fly-dx), var(--fly-dy)) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+}
+@utility journey-disk-fly {
+  animation: journey-disk-fly 0.65s cubic-bezier(0.5, 0, 0.3, 1) forwards;
+}
+
+/* Fundo opaco da seção, cobrindo a cena 3D, com as bordas esmaecidas. */
+@utility journey-backdrop {
+  background:
+    radial-gradient(ellipse 80% 35% at 50% 44%, rgba(196, 30, 30, 0.2) 0%, transparent 70%),
+    var(--color-void);
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 64px,
+    #000 calc(100% - 64px),
+    transparent
+  );
+  @media (min-width: 1024px) {
+    background:
+      radial-gradient(ellipse 45% 55% at 28% 52%, rgba(196, 30, 30, 0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 78% 50%, rgba(126, 26, 22, 0.14) 0%, transparent 70%),
+      var(--color-void);
+  }
+}
+
+@utility journey-scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ember-deep) transparent;
+}
+
+/* A Jornada fica de fora: ela sempre anima, como no mockup aprovado. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  :not(#jornada, #jornada *),
+  :not(#jornada, #jornada *)::before,
+  :not(#jornada, #jornada *)::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
