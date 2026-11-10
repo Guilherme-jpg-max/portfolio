@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useAnyInView } from "@/hooks/useAnyInView";
+import { cx } from "@/lib/cx";
 
 const ENTRIES = [
   "[ok] daemon.service started",
@@ -20,6 +22,8 @@ const ENTRIES = [
 
 export function LogTicker() {
   const [lines, setLines] = useState<string[]>(() => ENTRIES.slice(0, 6));
+  /** Seções com `data-hide-ticker` (como a Jornada) ocupam a tela inteira. */
+  const hidden = useAnyInView("[data-hide-ticker]");
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -34,7 +38,10 @@ export function LogTicker() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed bottom-14 right-4 z-20 hidden md:block font-mono text-[10px] leading-relaxed text-warm-paper/45 max-w-[240px] text-right"
+      className={cx(
+        "pointer-events-none fixed bottom-14 right-4 z-20 hidden md:block font-mono text-[10px] leading-relaxed text-warm-paper/45 max-w-[240px] text-right transition-opacity duration-300",
+        hidden && "opacity-0",
+      )}
     >
       {lines.map((l, i) => (
         <div key={`${i}-${l}`} style={{ opacity: 0.45 + (i / lines.length) * 0.35 }}>
