@@ -9,7 +9,6 @@ import { SceneBackground } from "@/features/scene/SceneBackground";
 import { AboutSection } from "./sections/AboutSection";
 import { ContactSection } from "./sections/ContactSection";
 import { HeroSection } from "./sections/HeroSection";
-import { WorkSection } from "./sections/WorkSection";
 
 const REDUCED_MOTION_PROGRESS = { current: 0.3 };
 
@@ -28,7 +27,6 @@ export function HomePage() {
       <main className="relative z-10">
         <HeroSection showScrollHint={isClient} />
         <AboutSection />
-        <WorkSection />
         <ContactSection />
         <SiteFooter />
       </main>
