@@ -1,10 +1,10 @@
 export const aboutNotes = {
-  focus: {
-    label: "~/about.md · foco atual",
-    text: "Sou desenvolvedor Full Stack Jr, estudante do 7º semestre de Sistemas de Informação no IFCE. Atuei como estagiário na Box3 Software, trabalhando com C# e .NET no back-end e React/TypeScript no front-end.",
+  whoami: {
+    label: "~/whoami",
+    text: "Sou o Guilherme, desenvolvedor full stack de Crato, no interior do Ceará, e estudante do 7º semestre de Sistemas de Informação no IFCE. Gosto de software que resolve problema real: entender quem vai usar, desenhar a solução e entregar do banco de dados à tela.",
   },
-  experience: {
-    label: "~/experience.log · trajetória",
-    text: "No meu estágio anterior desenvolvi um módulo de georreferenciamento fabril com lógica de coordenadas cartesianas e a funcionalidade completa de rateio de pagamentos recorrentes, do back-end ao front-end. Também refatorei código legado de jQuery para React/TypeScript.",
+  path: {
+    label: "~/trajetoria.log",
+    text: "Comecei a trabalhar em 2017, no atendimento ao cliente e na gestão administrativa. Foi ali que aprendi a ouvir, resolver conflitos e organizar processos. Depois ensinei lógica de programação e Python como tutor e, de lá, fui para o desenvolvimento. Hoje levo essa bagagem para o código, escrevendo pensando em quem usa e em quem vai manter.",
   },
 } as const;

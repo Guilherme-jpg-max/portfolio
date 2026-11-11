@@ -10,46 +10,48 @@ export function AboutSection() {
       <div className="mx-auto max-w-6xl w-full grid md:grid-cols-12 gap-8">
         <div className="md:col-span-5">
           <SectionHeading label="// 02_about.md">
-            notas
+            quem
             <br />
-            sobre meu
+            sou
             <br />
-            trabalho.
+            eu.
           </SectionHeading>
         </div>
 
         <div className="md:col-span-7 space-y-6">
-          <NotePanel label={aboutNotes.focus.label} className="rotate-[-0.15deg]">
-            <NoteText>{aboutNotes.focus.text}</NoteText>
+          <NotePanel label={aboutNotes.whoami.label} className="rotate-[-0.15deg]">
+            <NoteText>{aboutNotes.whoami.text}</NoteText>
           </NotePanel>
 
           <NotePanel
-            label={aboutNotes.experience.label}
+            label={aboutNotes.path.label}
             className="rotate-[0.1deg]"
             style={{ animationDelay: "120ms" }}
           >
-            <NoteText>{aboutNotes.experience.text}</NoteText>
+            <NoteText>{aboutNotes.path.text}</NoteText>
           </NotePanel>
 
           <NotePanel label="ls ~/skills" style={{ animationDelay: "240ms" }}>
-            <div className="space-y-3">
+            <dl className="space-y-4 sm:space-y-3 font-mono text-xs">
               {skillGroups.map((group) => (
                 <div
                   key={group.label}
-                  className="flex flex-wrap items-center gap-2 font-mono text-xs"
+                  className="grid gap-2 sm:grid-cols-[6rem_1fr] sm:items-start"
                 >
-                  <span className="text-warm-paper/40 w-24 shrink-0">{group.label}</span>
-                  {group.items.map((skill) => (
-                    <span
-                      key={skill}
-                      className="border border-ember px-2 py-1 text-warm-paper/80 hover:text-hot-signal hover:border-signal transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  <dt className="text-warm-paper/40 sm:py-1">{group.label}</dt>
+                  <dd className="flex flex-wrap gap-2">
+                    {group.items.map((skill) => (
+                      <span
+                        key={skill}
+                        className="border border-ember px-2 py-1 text-warm-paper/80 hover:text-hot-signal hover:border-signal transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </NotePanel>
         </div>
       </div>
