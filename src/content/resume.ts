@@ -4,10 +4,25 @@ export const summary =
   "Estudante do 7º semestre de Sistemas de Informação no IFCE, com propósito de construir soluções de software que resolvam problemas reais de negócio. Atuei recentemente como Desenvolvedor Full Stack na Box3 Software, trabalhando com C#, .NET e React/TypeScript no desenvolvimento de sistemas desde o levantamento de requisitos com usuários finais até a entrega de funcionalidades do back-end ao front-end. Antes disso, atuei como Tutor de Programação na Kodland Brasil, ensinando lógica de programação e Python. Tenho também uma trajetória anterior em atendimento ao cliente e gestão administrativa, que me deu uma base sólida em comunicação, resolução de conflitos e organização. Busco novas oportunidades para continuar crescendo como desenvolvedor full stack em times que valorizem código bem estruturado, aprendizado constante e colaboração.";
 
 export const stack: Record<string, string[]> = {
-  "back-end": ["C#", ".NET (Core/Framework)", "Entity Framework", "REST APIs", "Dapper"],
+  "back-end": [
+    "C#",
+    ".NET (Core/Framework)",
+    "Entity Framework",
+    "Node.js/Express",
+    "Hono",
+    "REST APIs",
+    "Dapper",
+  ],
   "front-end": ["React", "TypeScript", "JavaScript (ES6+)", "Tailwind CSS"],
-  "banco de dados": ["PostgreSQL", "MySQL", "SQLite", "Otimização de queries"],
-  ferramentas: ["Git/GitHub", "Versionamento de código", "Axios"],
+  "banco de dados": [
+    "SQL Server",
+    "PostgreSQL",
+    "MySQL",
+    "SQLite",
+    "MongoDB",
+    "Otimização de queries",
+  ],
+  ferramentas: ["Git/GitHub", "Versionamento de código", "Cloudflare Workers", "Axios"],
 };
 
 export const experiences: Experience[] = [
@@ -37,7 +52,7 @@ export const experiences: Experience[] = [
     summary: "Full stack em C#/.NET e React/TypeScript, do requisito com o cliente à entrega.",
     bullets: [
       "Atuação presencial com clientes para compreender o uso real do sistema, mapear fluxos de trabalho e coletar requisitos diretos com usuários finais.",
-      "Desenvolvimento do módulo de georreferenciamento fabril, com lógica de coordenadas cartesianas (X, Y, Z) e integração com PostgreSQL e APIs em C#.",
+      "Desenvolvimento do módulo de georreferenciamento fabril, com lógica de coordenadas cartesianas (X, Y, Z) e integração com SQL Server e APIs em C#.",
       "Implementação completa da funcionalidade de rateio de pagamentos recorrentes, do back-end à interface front-end.",
       "Refatoração de código legado em jQuery para React/TypeScript, elevando a performance de carregamento em 40%.",
       "Participação ativa na correção de bugs críticos via Backoffice, garantindo 99,5% de estabilidade operacional.",

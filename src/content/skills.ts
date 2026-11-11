@@ -7,10 +7,28 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     label: "frameworks",
-    items: [".NET", "ASP.NET Core", "Entity Framework", "React", "Tailwind CSS"],
+    items: [
+      ".NET",
+      "ASP.NET Core",
+      "Entity Framework",
+      "Node.js",
+      "Express",
+      "Hono",
+      "React",
+      "Tailwind CSS",
+    ],
   },
   {
     label: "dados/infra",
-    items: ["PostgreSQL", "MySQL", "SQLite", "Dapper", "REST APIs"],
+    items: [
+      "SQL Server",
+      "PostgreSQL",
+      "MySQL",
+      "SQLite",
+      "MongoDB",
+      "Dapper",
+      "REST APIs",
+      "Cloudflare Workers",
+    ],
   },
 ];

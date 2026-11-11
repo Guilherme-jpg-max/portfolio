@@ -4,7 +4,8 @@ const WHATSAPP_GREETING = "Olá, vi seu portfólio e gostaria de falar sobre uma
 export const profile = {
   name: "Guilherme Carlos",
   fullName: "Guilherme Carlos Sousa da Silva",
-  headline: "Desenvolvedor Full Stack Jr · C# · .NET · React · TypeScript · MySQL · PostgreSQL",
+  headline:
+    "Desenvolvedor Full Stack Jr · C# · .NET · React · TypeScript · SQL Server · PostgreSQL",
   phone: "(88) 92171-5211",
   email: "guilhermecarlostrabalho@gmail.com",
   location: "Crato, Ceará, Brasil",
