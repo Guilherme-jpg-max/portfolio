@@ -62,6 +62,9 @@ export function JourneySection() {
             >
               {journeyCopy.title}
             </h2>
+            <p className="m-0 mt-2 max-w-[640px] text-sm leading-relaxed text-warm-paper/70">
+              {journeyCopy.intro}
+            </p>
           </div>
           <ol className="m-0 hidden list-none items-center gap-[22px] p-0 pt-2 font-mono text-[10.5px] uppercase tracking-[0.2em] text-warm-paper/60 lg:flex">
             {journeyCopy.steps.map((step, i) => (

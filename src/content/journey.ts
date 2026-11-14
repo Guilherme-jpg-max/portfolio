@@ -2,9 +2,11 @@ import type { SidePhase } from "./types";
 
 export const journeyCopy = {
   kicker: "// 03 — jornada",
-  title: "Do balcão ao full stack.",
-  steps: ["escolha a fase", "insira um disquete"],
-  mobileHint: "toque numa fase · depois num disquete",
+  title: "Experiência.",
+  intro:
+    "Cada fase da minha carreira guarda uma caixa de disquetes, um para cada projeto. Escolha uma fase, insira um disquete no computador e leia o README do projeto.",
+  steps: ["Escolha a fase", "Insira um disquete"],
+  mobileHint: "Toque numa fase e depois num disquete",
 } as const;
 
 /** Abre a linha do tempo e guarda os projetos com `experienceId: null`. */

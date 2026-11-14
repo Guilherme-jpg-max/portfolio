@@ -79,7 +79,7 @@ A seção `#jornada` da home substitui a antiga lista paginada de projetos. Ela 
 
 - **Fases:** _Pessoais & IFCE_ abre a linha do tempo, seguida das experiências em ordem cronológica até a atual (`end: null`), que vem selecionada ao carregar.
 - **Desktop (≥ 1024px), tudo numa tela de notebook sem rolar:**
-  - topo: `// 03 — jornada`, o título e os passos `01 escolha a fase · 02 insira um disquete`;
+  - topo: `// 03 — jornada`, o título "Experiência.", uma frase explicando a tela e os passos `01 Escolha a fase · 02 Insira um disquete`;
   - à esquerda, o PC em perspectiva (`rotateY ≈ 11°`), flutuando devagar, com halo pulsando atrás, tela CRT com scanlines e faixa de varredura, e embaixo o drive A: com LED e os botões físicos (`⏏ ejetar`, `ver código ↗` ou `privado`);
   - à direita, a caixa de disquetes: uma lombada por projeto com nome, stack curta e `↗` (público) ou `⌂` (privado). Cabem 9 sem rolar, e acima disso a caixa rola por dentro;
   - embaixo, a linha do tempo horizontal: período, ponto, empresa e cargo, com uma barra brilhante que desliza até a fase ativa e um pulso no ponto.

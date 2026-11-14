@@ -9,7 +9,7 @@ export const profile = {
   phone: "(88) 92171-5211",
   email: "guilhermecarlostrabalho@gmail.com",
   location: "Crato, Ceará, Brasil",
-  careerStartYear: 2017,
+  careerStartYear: 2023,
   links: {
     whatsapp: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_GREETING)}`,
     github: "https://github.com/Guilherme-jpg-max",

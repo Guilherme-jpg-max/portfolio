@@ -7,9 +7,7 @@ export function ContactSection() {
     <section id="contact" className="min-h-screen flex items-center px-6 py-24">
       <div className="mx-auto max-w-3xl w-full">
         <SectionHeading label="// 04_contact.sh" centered>
-          abra um
-          <br />
-          canal.
+          Contato.
         </SectionHeading>
         <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-warm-paper/40 text-center mb-10">
           ls ~/channels · escolha por onde falar comigo

@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { aboutNotes } from "@/content/about";
+import { aboutNote } from "@/content/about";
 import { skillGroups } from "@/content/skills";
 import { cx } from "@/lib/cx";
 
@@ -10,28 +10,22 @@ export function AboutSection() {
       <div className="mx-auto max-w-6xl w-full grid md:grid-cols-12 gap-8">
         <div className="md:col-span-5">
           <SectionHeading label="// 02_about.md">
-            quem
+            Sobre
             <br />
-            sou
-            <br />
-            eu.
+            mim.
           </SectionHeading>
         </div>
 
         <div className="md:col-span-7 space-y-6">
-          <NotePanel label={aboutNotes.whoami.label} className="rotate-[-0.15deg]">
-            <NoteText>{aboutNotes.whoami.text}</NoteText>
+          <NotePanel label={aboutNote.label} className="rotate-[-0.15deg]">
+            <div className="space-y-4">
+              {aboutNote.paragraphs.map((paragraph) => (
+                <NoteText key={paragraph}>{paragraph}</NoteText>
+              ))}
+            </div>
           </NotePanel>
 
-          <NotePanel
-            label={aboutNotes.path.label}
-            className="rotate-[0.1deg]"
-            style={{ animationDelay: "120ms" }}
-          >
-            <NoteText>{aboutNotes.path.text}</NoteText>
-          </NotePanel>
-
-          <NotePanel label="ls ~/skills" style={{ animationDelay: "240ms" }}>
+          <NotePanel label="ls ~/skills" style={{ animationDelay: "120ms" }}>
             <dl className="space-y-4 sm:space-y-3 font-mono text-xs">
               {skillGroups.map((group) => (
                 <div
